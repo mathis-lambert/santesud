@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nouveau projet</title>
+
+    <!-- import css -->
+    <link rel="stylesheet" href="./assets/style/style.css" />
+  </head>
+  <body>
+    <div class="homeContainer">
+      <h1 class="main-title text-stroke">SANTE SUD</h1>
+
+      <div class="inputAndResult">
+        <div class="inputContainer">
+          <label for="chooseCity">Rentrez votre ville :</label>
+          <input type="text" name="ville" id="chooseCity" />
+        </div>
+
+        <div class="results">
+          <ul class="resultList"></ul>
+        </div>
+      </div>
+      <br /><br />
+      <h2 id="nomVille"></h2>
+      <h2 id="iqaVal"></h2>
+    </div>
+
+    <!-- Javascript import files -->
+    <script src="./assets/app/dayLight.js"></script>
+    <script src="assets/app/selectCity.js"></script>
+  </body>
+</html>
