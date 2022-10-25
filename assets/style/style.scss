@@ -45,12 +45,15 @@ body {
       width: 100%;
       z-index: 1;
       input {
-        border: solid 5px #424dae;
+        border: solid 3px #424dae;
         border-radius: 50px;
         width: 100%;
         padding: 0.5rem 1.5rem;
         font-size: 2.5rem;
         color: #424dae;
+        &:focus {
+          outline: none;
+        }
       }
       label {
         position: absolute;
@@ -66,7 +69,7 @@ body {
     .results {
       position: absolute;
       background-color: white;
-      border: solid 5px #424dae;
+      border: solid 3px #424dae;
       width: 100%;
       top: 50%;
       z-index: 0;
@@ -134,8 +137,8 @@ body {
   height: 100px;
   width: 100px;
   .loader {
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #8a34db;
+    border: 2px solid #ffffff00;
+    border-top: 4px solid #0077ff;
     border-radius: 50%;
     width: 100%;
     height: 100%;
@@ -151,24 +154,118 @@ body {
   }
 }
 
-.iqa-meter {
+.page_container {
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.skeleton {
+  animation: pulse 1s ease-in-out infinite;
   position: relative;
-  width: 300px;
-  height: 25px;
-  border-radius: 5vw;
-  background-color: rgba($color: #f9f9f9, $alpha: 0.5);
-  .fill-gauge {
+  &.reco_card {
+    height: 200px;
+  }
+  .loading-div {
     position: absolute;
-    left: 0;
-    width: 0;
-    height: 100%;
-    border-radius: 5vw;
-    background-color: #0084ff;
-    transition: 0.2s;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
-h1#active_city {
+@keyframes pulse {
+  0% {
+    background-color: #bdbdbd3b;
+  }
+  50% {
+    background-color: #cececead;
+  }
+  100% {
+    background-color: #bdbdbd3b;
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.data_container {
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.iqa-meter {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .fill-gauge {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background-color: #0084ff;
+    transition: 0.3s;
+  }
+}
+
+.reco_card {
+  flex: 1 1 50%;
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background-color: rgba($color: #eeeeee, $alpha: 0.35);
+}
+
+.particles_container,
+.iqa_container {
+  flex: 0 1 auto;
+  aspect-ratio: 1/1;
+  border-radius: 1.5rem;
+  background-color: rgba($color: #eeeeee, $alpha: 0.35);
+  overflow: hidden;
+}
+
+.iqa_container {
+  position: relative;
+  .iqa_value {
+    position: absolute;
+    z-index: 2;
+    color: white;
+    font-size: 125%;
+    font-weight: 700;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+}
+
+h1#active_city,
+h1#temp {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #fff;
@@ -195,4 +292,23 @@ p {
 .ville {
   color: #fff;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .reco_card {
+    flex: 1 1 100%;
+  }
+  .iqa_container,
+  .particles_container {
+    flex: 1 0 45%;
+    max-height: 220px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .iqa_container,
+  .reco_card,
+  .particles_container {
+    height: 200px;
+  }
 }

@@ -9,20 +9,43 @@
     <link rel="stylesheet" href="./assets/style/style.css" />
   </head>
   <body>
-    <h1 id="active_city"></h1>
-    <p id="todayReco"></p>
-    <div class="loading-div">
-      <div class="loader"></div>
+    <div class="page_container">
+      <div class="d-flex">
+        <h1 id="active_city"></h1>
+        <h1 id="temp"></h1>
+      </div>
+
+      <div class="data_container d-flex align-center full-width">
+        <div class="skeleton reco_card">
+          <div class="loading-div">
+            <div class="loader"></div>
+          </div>
+          <p id="todayReco"></p>
+        </div>
+        <div class="skeleton iqa_container" data-target="#iqa_modal">
+          <div class="loading-div">
+            <div class="loader"></div>
+          </div>
+          <div class="iqa_value"></div>
+          <div class="iqa-meter">
+            <div class="fill-gauge"></div>
+          </div>
+        </div>
+        <div
+          data-target="#particles_modal"
+          class="skeleton particles_container d-flex align-center justify-center column"
+        >
+          <div class="loading-div">
+            <div class="loader"></div>
+          </div>
+          <h3 class="particles" id="p0"></h3>
+          <h3 class="particles" id="p1"></h3>
+          <h3 class="particles" id="p2"></h3>
+          <h3 class="particles" id="p3"></h3>
+          <h3 class="particles" id="p4"></h3>
+        </div>
+      </div>
     </div>
-    <div class="content"></div>
-    <div class="iqa-meter">
-      <div class="fill-gauge"></div>
-    </div>
-    <h3 class="particles" id="p0"></h3>
-    <h3 class="particles" id="p1"></h3>
-    <h3 class="particles" id="p2"></h3>
-    <h3 class="particles" id="p3"></h3>
-    <h3 class="particles" id="p4"></h3>
     <!-- JS FILES -->
     <script src="./assets/app/dayLight.js"></script>
     <script src="./assets/app/compute.js"></script>

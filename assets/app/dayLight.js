@@ -19,8 +19,8 @@ if (hour >= 5 && hour < 9) {
   bgGradient.style.background = bgGradients.morning;
 } else if (hour >= 12 && hour < 18) {
   bgGradient.style.background = bgGradients.afternoon;
-} else if (hour >= 18 && hour < 21) {
+} else if (hour >= 18 && hour < 20) {
   bgGradient.style.background = bgGradients.evening;
-} else if (hour >= 21 || hour < 5) {
+} else if (hour >= 20 || hour < 5) {
   bgGradient.style.background = bgGradients.night;
 }

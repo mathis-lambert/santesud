@@ -72,5 +72,5 @@ function clearList() {
 
 // fonction pour ouvrir le lien associé à la ville sélectionnée (code insee)
 function openLink(insee, city) {
-  window.location.href = `view?insee=${insee}&ville=${city}`;
+  window.location.href = `view.html?insee=${insee}&ville=${city}`;
 }
