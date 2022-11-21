@@ -1,38 +1,53 @@
+console.log("hello, world!");
 // get page parameters with let
 let params = new URLSearchParams(window.location.search);
 let insee = params.get("insee");
 let city = params.get("ville");
 
-const cityTitle = document.querySelector("#active_city");
-cityTitle.innerHTML = city + "&nbsp;";
+// date calculs
+let timestamp_today = Date.parse(new Date()) / 1000;
+let timestamp_lastyear = timestamp_today - 31536000;
+let lastyear_to_date = new Date(timestamp_lastyear * 1000)
+  .toISOString()
+  .split("T")[0];
 
-const recommendations = document.querySelector("#todayReco");
+const months = [
+  "Janvier",
+  "Février",
+  "Mars",
+  "Avril",
+  "Mai",
+  "Juin",
+  "Juillet",
+  "Août",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
+];
 
-const loaders = document.querySelectorAll(".loading-div");
-const iqaValue = document.querySelector(".iqa_value");
-const iqaGauge = document.querySelector(".fill-gauge");
-const skeletons = document.querySelectorAll(".skeleton");
+if (city && insee) {
+  const cityTitle = document.querySelector("#active_city");
+  cityTitle.innerHTML = city + "&nbsp;";
 
-/* async function getIQA(insee) {
-  const response = await fetch(
-    `https://api.atmosud.org/iqa2021/commune/bulletin/journalier/${insee}`
-  );
-  const data = await response.json();
-  return data;
-} 
-let IQA = getIQA(insee); */
-async function getInfos(insee) {
-  const response = await fetch(
-    `https://api.atmosud.org/siam/v1/communes/${insee}`
-  );
-  const data = await response.json();
-  return data.data;
-}
+  const recommendations = document.querySelector("#todayReco");
 
-let cityInfos = getInfos(insee);
+  const loaders = document.querySelectorAll(".loading-div"),
+    iqaValue = document.querySelector(".iqa_value"),
+    iqaGauge = document.querySelector(".fill-gauge"),
+    skeletons = document.querySelectorAll(".skeleton");
 
-cityInfos
-  .then((data) => {
+  async function getInfos(insee) {
+    const response = await fetch(
+      `https://api.atmosud.org/siam/v1/communes/${insee}`
+    );
+    const data = await response.json();
+    return data.data;
+  }
+
+  let cityInfos = getInfos(insee);
+
+  cityInfos.then((data) => {
     console.log(data);
     // stop displaying loaders when promise is resolved
     loaders.forEach((loader) => {
@@ -82,57 +97,134 @@ cityInfos
         infos.legendes.indice_atmo[value.indice_atmo].couleur;
     }
 
-    //TODO: add weather informations
     let coord = {
       // get coordinate of searched city
       x: infos.commune.centroid.x,
       y: infos.commune.centroid.y,
     };
+    const embedMap = document.querySelector(".embed_map");
+    embedMap.innerHTML += `
+    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_ih0KhLOgejFwZ85rzYf6W9VdRo6OtCk&q=${coord.y},${coord.x}&zoom=12&maptype=satellite&language=fr" frameborder="0" style="border:0" allowfullscreen width="100%" height="100%"></iframe>
+    `;
+    //fetch from meteomatics
+    async function weatherInformations(x, y) {
+      let username = "iut_lambert";
+      let password = "zv6g5ZwFK7";
 
-    let weatherInfo = weatherInformations(coord.x, coord.y);
-    console.log(
-      "je suis la",
-      weatherInfo.then((data) => console.log(data))
-    );
-    weatherInfo.then((data) => {
+      let actualDate = new Date();
+
+      const response = await fetch(
+        `https://api.meteomatics.com/${actualDate.toISOString()}/t_2m:C,weather_symbol_1h:idx/${y},${x}/json`,
+        {
+          headers: new Headers({
+            Authorization: "Basic " + btoa(`${username}:${password}`),
+          }),
+        }
+      );
+      const data = await response.json();
+      call_webGL(data);
+    }
+
+    weatherInformations(coord.x, coord.y);
+
+    function call_webGL(data) {
+      let weatherIconIndex = data.data[1].coordinates[0].dates[0].value;
+      weather_id = weatherIconIndex;
+
+      // import index.min.js file to enable it
+      fetch("./assets/app/weather/rainDay.js")
+        .then((response) => response.text())
+        .then((data) => {
+          eval(data);
+        })
+        .catch((error) => {
+          console.log("erreur de chargement du fichier webGL", error);
+        });
+
+      console.log(data);
       const temp = document.querySelector("#temp");
-      temp.innerHTML = `${data.data[0].coordinates[0].dates[0].value}°C`;
-    });
-  })
-  .then((error) => {
-    loaders.forEach((loader) => {
-      loader.querySelector(".loader").style.borderTop = "4px solid red";
-    });
+      const weatherContainer = document.querySelector(".weather_container");
+      let temperature = Math.floor(data.data[0].coordinates[0].dates[0].value);
+
+      temp.innerHTML = `${temperature}°C`;
+      weatherContainer.innerHTML += `<img src="assets/icons/${weatherIconIndex}.png" alt="weather icon" id="weatherIcon" />`;
+    }
   });
-
-let username = "iut_lambert";
-let password = "zv6g5ZwFK7";
-
-//fetch from meteomatics
-async function weatherInformations(x, y) {
-  let actualDate = new Date();
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJ2IjoxLCJ1c2VyIjoiaXV0X2xhbWJlcnQiLCJpc3MiOiJsb2dpbi5tZXRlb21hdGljcy5jb20iLCJleHAiOjE2NjY2MzE2NjcsInN1YiI6ImFjY2VzcyJ9.fwAQX2GHXLbhjvzPmVfoVLCzhF-JT-bmeATRepAP3UlS4F-yLSioUViM7luDSyQg0NiYPr0f0AQv5txm2urWeQ";
-
-  const response = await fetch(
-    `https://api.meteomatics.com/${actualDate.toISOString()}/t_2m:C,weather_symbol_1h:idx/${x},${y}/json?access_token=${token}`
-  );
-  const data = await response.json();
-  return data;
+} else {
+  // if there is no city in the url, redirect to index.html
+  window.location.href = "/";
 }
 
-// FIXME: add a function to get the token
+async function fetch_historical() {
+  const response = await fetch(
+    `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=${insee}&srid=2154&echeances=0&date_diff_min=${lastyear_to_date}`
+  );
+  const data = await response.json();
+  iqa_month_average(data);
+}
 
-fetch(
-  "https://" + username + ":" + password + "@login.meteomatics.com/api/v1/token"
-)
-  .then(function (resp) {
-    return resp.json();
-  })
-  .then(function (data) {
-    var token = data.access_token;
-    console.log("token", token);
-  })
-  .catch(function (err) {
-    console.log("something went wrong", err);
-  });
+fetch_historical();
+
+const iqa_month_average = (data) => {
+  console.log(data[0].bulletins);
+
+  const yAxis = [];
+
+  let temp = [];
+
+  for (let i = 1; i <= 12; i++) {
+    temp = [];
+    let month_match = new RegExp(`^[0-9]{4}-${i < 10 ? "0" + i : i}-[0-9]{2}$`);
+    let month_average = 0;
+
+    for (let j = 0; j < data[0].bulletins.length; j++) {
+      if (month_match.test(data[0].bulletins[j].date_diffusion)) {
+        month_average += data[0].bulletins[j].valeurs[0].indice.valeur;
+        temp.push("i");
+      }
+    }
+    yAxis.push(Math.round((month_average / temp.length) * 100) / 100);
+  }
+  iqa_month_graph(yAxis);
+};
+
+function iqa_month_graph(yAxis) {
+  const trace1 = {
+    x: months,
+    y: yAxis,
+    name: "pollution",
+    histnorm: "Degrés",
+    text: yAxis.map(String),
+    textposition: "auto",
+    font: {
+      color: "#fff",
+    },
+
+    marker: {
+      color: "rgba(255, 255, 255, 1)",
+      width: 1,
+    },
+    opacity: 0.9,
+    type: "bar",
+  };
+
+  const graph_array = [trace1];
+
+  const layout = {
+    title: "Moyenne de la qualité de l'air sur l'année",
+    xaxis: { title: "Mois" },
+    yaxis: {
+      title: "Indice",
+      range: [0, 7],
+    },
+    height: 275,
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)",
+    font: {
+      color: "white",
+    },
+    dragmode: true,
+  };
+
+  Plotly.newPlot("graph", graph_array, layout, { responsive: true });
+}

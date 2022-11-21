@@ -9,11 +9,17 @@
   box-sizing: border-box;
 }
 
+.image-preload {
+  position: absolute;
+  left: -9999px;
+}
+
 /* body */
 body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background-image: linear-gradient(45deg, #2e437e, #0084ff);
 }
 
@@ -49,7 +55,7 @@ body {
         border-radius: 50px;
         width: 100%;
         padding: 0.5rem 1.5rem;
-        font-size: 2.5rem;
+        font-size: clamp(1rem, 2vw, 2.5rem);
         color: #424dae;
         &:focus {
           outline: none;
@@ -134,6 +140,10 @@ body {
 }
 
 .loading-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 100px;
   width: 100px;
   .loader {
@@ -161,7 +171,9 @@ body {
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
+  position: relative;
+  z-index: 100;
 }
 
 .skeleton {
@@ -180,13 +192,13 @@ body {
 
 @keyframes pulse {
   0% {
-    background-color: #bdbdbd3b;
+    background-color: #30303088;
   }
   50% {
-    background-color: #cececead;
+    background-color: #303030b4;
   }
   100% {
-    background-color: #bdbdbd3b;
+    background-color: #30303088;
   }
 }
 
@@ -211,9 +223,12 @@ body {
 }
 
 .data_container {
-  gap: 2rem;
+  gap: 0.5rem;
   justify-content: space-between;
   flex-wrap: wrap;
+  div {
+    position: relative;
+  }
 }
 
 .iqa-meter {
@@ -232,12 +247,14 @@ body {
   }
 }
 
-.reco_card {
+.reco_card,
+.embed_map {
   flex: 1 1 50%;
   height: fit-content;
   padding: 1rem;
   border-radius: 1.5rem;
-  background-color: rgba($color: #eeeeee, $alpha: 0.35);
+  background-color: rgba($color: #303030, $alpha: 0.5);
+  backdrop-filter: blur(10px);
 }
 
 .particles_container,
@@ -245,7 +262,8 @@ body {
   flex: 0 1 auto;
   aspect-ratio: 1/1;
   border-radius: 1.5rem;
-  background-color: rgba($color: #eeeeee, $alpha: 0.35);
+  background-color: rgba($color: #303030, $alpha: 0.5);
+  backdrop-filter: blur(10px);
   overflow: hidden;
 }
 
@@ -253,7 +271,7 @@ body {
   position: relative;
   .iqa_value {
     position: absolute;
-    z-index: 2;
+    z-index: 102;
     color: white;
     font-size: 125%;
     font-weight: 700;
@@ -267,7 +285,6 @@ body {
 h1#active_city,
 h1#temp {
   font-size: 2rem;
-  margin-bottom: 1rem;
   color: #fff;
 }
 p {
@@ -294,14 +311,29 @@ p {
   text-align: center;
 }
 
+.embed_map {
+  position: relative;
+  height: 300px;
+  padding: 0.5rem !important;
+  iframe {
+    border-radius: 1rem;
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .reco_card {
+  .reco_card,
+  .embed_map {
     flex: 1 1 100%;
   }
+
   .iqa_container,
   .particles_container {
     flex: 1 0 45%;
     max-height: 220px;
+  }
+
+  .homeContainer h1 {
+    font-size: 4rem;
   }
 }
 

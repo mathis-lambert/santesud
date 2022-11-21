@@ -5,16 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Voir info</title>
+    <!-- Load plotly.js into the DOM -->
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
 
     <link rel="stylesheet" href="./assets/style/style.css" />
   </head>
   <body>
+    <div class="image-preload">
+      <img src="img/drop-color.png" alt="" />
+      <img src="img/drop-alpha.png" alt="" />
+      <img src="img/good.jpg" alt="" />
+      <!--       <img src="img/weather/texture-rain-fg.png" />
+      <img src="img/weather/texture-rain-bg.png" />
+      <img src="img/weather/texture-fallout-fg.png" />
+      <img src="img/weather/texture-fallout-bg.png" />
+      <img src="img/weather/texture-drizzle-fg.png" />
+      <img src="img/weather/texture-drizzle-bg.png" /> -->
+    </div>
+    <canvas
+      width="1"
+      height="1"
+      id="container"
+      style="position: fixed; width: 100%; height: 100%"
+    ></canvas>
+    <!-- CONTAINER -->
     <div class="page_container">
-      <div class="d-flex">
+      <div class="head_container d-flex column justify-center align-center">
         <h1 id="active_city"></h1>
-        <h1 id="temp"></h1>
+        <div class="weather_container d-flex justify-center align-center">
+          <h1 id="temp"></h1>
+        </div>
       </div>
-
+      <!-- cards -->
       <div class="data_container d-flex align-center full-width">
         <div class="skeleton reco_card">
           <div class="loading-div">
@@ -22,6 +44,7 @@
           </div>
           <p id="todayReco"></p>
         </div>
+
         <div class="skeleton iqa_container" data-target="#iqa_modal">
           <div class="loading-div">
             <div class="loader"></div>
@@ -31,6 +54,7 @@
             <div class="fill-gauge"></div>
           </div>
         </div>
+
         <div
           data-target="#particles_modal"
           class="skeleton particles_container d-flex align-center justify-center column"
@@ -44,8 +68,22 @@
           <h3 class="particles" id="p3"></h3>
           <h3 class="particles" id="p4"></h3>
         </div>
+
+        <div class="embed_map skeleton">
+          <div class="loading-div">
+            <div class="loader"></div>
+          </div>
+        </div>
+        <div class="embed_map skeleton">
+          <div id="graph"></div>
+
+          <div class="loading-div">
+            <div class="loader"></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <!-- JS FILES -->
     <script src="./assets/app/dayLight.js"></script>
     <script src="./assets/app/compute.js"></script>

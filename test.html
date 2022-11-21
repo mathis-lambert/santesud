@@ -19,46 +19,26 @@
     <div class="square"></div>
 
     <script>
-      // variable constante qui prend le code INSEE
-      const INSEE = 13005;
+      const url =
+        "https://api.meteomatics.com/2022-10-25T00:00:00Z/t_2m:C/52.520551,13.461804/json";
+      const username = "iut_lambert";
+      const password = "zv6g5ZwFK7";
+      const tokenUrl = "https://login.meteomatics.com/api/v1/token";
 
-      // fonction qui retourne une promesse
-      async function fetchData(insee) {
-        const response = await fetch(
-          `https://api.atmosud.org/iqa2021/commune/bulletin/journalier/${insee}`
-        );
-        const data = await response.json();
-        return data;
+      async function basicAuthFetch() {
+        const response1 = await fetch(url, {
+          headers: new Headers({
+            Authorization: "Basic " + btoa(`${username}:${password}`),
+          }),
+        });
+        const json = await response1.json();
+
+        return json;
       }
-
-      // le bloc de fonction ne s'execute avec l'appel de fonction ci-dessous
-      fetchData(INSEE).then((data) => {
+      // Run fetch
+      basicAuthFetch().then((data) => {
         console.log(data);
-        console.log(data.valeurs[2].indice.qualificatif);
-
-        // prendre les balises HTML
-        const IQA = document.getElementById("IQA");
-        const square = document.querySelector(".square");
-
-        // entrer la variable qualificatif
-        let qualificatif = data.valeurs[2].indice.qualificatif;
-
-        //ajouter la valeur de qualificatif a la balise HTMl
-        IQA.innerHTML = qualificatif;
-
-        // comparatif des résultats de l'API avec les couleurs
-        if (qualificatif === "Mauvais") {
-          IQA.style.color = "red";
-          square.style.backgroundColor = "red";
-        }
-        if (qualificatif === "Moyen") {
-          IQA.style.color = "orange";
-          square.style.backgroundColor = "orange";
-        }
-        if (qualificatif === "Bon") {
-          IQA.style.color = "green";
-          square.style.backgroundColor = "green";
-        }
+        const temp = data.data[0].coordinates[0].dates[0].value;
       });
     </script>
   </body>
