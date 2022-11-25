@@ -17,10 +17,10 @@ if (hour >= 5 && hour < 9) {
   bgGradient.style.background = bgGradients.earlyMorning;
 } else if (hour >= 9 && hour < 12) {
   bgGradient.style.background = bgGradients.morning;
-} else if (hour >= 12 && hour < 18) {
+} else if (hour >= 12 && hour < 16) {
   bgGradient.style.background = bgGradients.afternoon;
-} else if (hour >= 18 && hour < 20) {
+} else if (hour >= 16 && hour < 18) {
   bgGradient.style.background = bgGradients.evening;
-} else if (hour >= 20 || hour < 5) {
+} else if (hour >= 18 || hour < 5) {
   bgGradient.style.background = bgGradients.night;
 }
