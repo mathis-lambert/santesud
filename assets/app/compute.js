@@ -149,6 +149,8 @@ async function weatherInformations(x, y) {
     {
       headers: new Headers({
         Authorization: "Basic " + btoa(`${username}:${password}`),
+        // handle cors no 'Access-Control-Allow-Origin' header is present on the requested resource
+        "Access-Control-Allow-Origin": "*",
       }),
     }
   );
