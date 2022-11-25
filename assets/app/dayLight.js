@@ -5,8 +5,8 @@ console.log(hour);
 
 let bgGradients = {
   earlyMorning: "linear-gradient(0deg, rgb(199 108 46), rgb(35 101 184))",
-  morning: "linear-gradient(0deg, rgb(186 187 212), rgb(0 92 177))",
-  afternoon: "linear-gradient(0deg, rgb(186 187 212), rgb(0 92 177))",
+  morning: "linear-gradient(0deg, rgb(237 238 255), rgb(0 116 224))",
+  afternoon: "linear-gradient(0deg, rgb(237 238 255), rgb(0 116 224))",
   evening: "linear-gradient(0deg, rgb(199 108 46), rgb(35 101 184))",
   night: "linear-gradient(0deg, rgb(58 84 136), rgb(1 21 40))",
 };

@@ -11,16 +11,81 @@
     <link rel="stylesheet" href="./assets/style/style.css" />
   </head>
   <body>
+    <div class="blur-bg-modal"></div>
+    <div class="modal" id="particles_modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Particules :</h2>
+        </div>
+        <div class="modal-body">
+          <h3 class="particles" id="p0"></h3>
+          <p>
+            PM10 est une particule de 10 micromètres de diamètre ou moins. Elle
+            est considérée comme très dangereuse pour la santé. Elle est
+            principalement émise par les véhicules et les industries.
+          </p>
+          <h3 class="particles" id="p1"></h3>
+          <p>
+            PM2.5 est la particule la plus fine et la plus dangereuse pour la
+            santé car elle peut pénétrer profondément dans les poumons.
+          </p>
+          <h3 class="particles" id="p2"></h3>
+          <p>
+            O3 (Ozone) est un gaz qui se forme dans l'atmosphère par la réaction
+            de l'oxygène et des polluants organiques. Il est principalement émis
+            par les véhicules et les industries.
+          </p>
+          <h3 class="particles" id="p3"></h3>
+          <p>
+            NO2 (Oxyde d'azote) est un polluant indicateur des activités de
+            combustion, notamment le trafic routier.
+          </p>
+          <h3 class="particles" id="p4"></h3>
+          <p>
+            SO2 (dioxyde de soufre) est un polluant émis par les centrales
+            électriques, les industries et les véhicules. Il produit une
+            irritation sévère de la muqueuse du tractus respiratoire avec
+            lésions cellulaires et œdèmes laryngotrachéal et pulmonaire.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="iqa_modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>IQA :</h2>
+        </div>
+        <div class="modal-body">
+          <p>
+            l'indice de qualité de l'air (IQA) est un indice qui permet de
+            déterminer la qualité de l'air en fonction de la concentration des
+            polluants dans l'air.
+            <br />
+            Il est calculé à partir des concentrations mesurées de particules
+            fines (PM10 et PM2.5), de dioxyde de soufre (SO2), d'oxyde d'azote
+            (NO2) et d'ozone (O3).
+            <br />
+            L'IQA est calculé à partir de la formule suivante :
+            <br />
+            <code>
+              IQA = 100 - 100 * (PM10 + PM2.5 + SO2 + NO2 + O3) / (PM10 + PM2.5
+              + SO2 + NO2 + O3)max
+            </code>
+            <br />
+            où PM10, PM2.5, SO2, NO2 et O3 sont les concentrations mesurées des
+            polluants en µg/m3 et PM10 + PM2.5 + SO2 + NO2 + O3)max est la
+            concentration maximale des polluants en µg/m3.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="image-preload">
       <img src="img/drop-color.png" alt="" />
       <img src="img/drop-alpha.png" alt="" />
       <img src="img/good.jpg" alt="" />
-      <!--       <img src="img/weather/texture-rain-fg.png" />
-      <img src="img/weather/texture-rain-bg.png" />
-      <img src="img/weather/texture-fallout-fg.png" />
-      <img src="img/weather/texture-fallout-bg.png" />
-      <img src="img/weather/texture-drizzle-fg.png" />
-      <img src="img/weather/texture-drizzle-bg.png" /> -->
     </div>
     <canvas
       width="1"
@@ -30,55 +95,89 @@
     ></canvas>
     <!-- CONTAINER -->
     <div class="page_container">
-      <div class="head_container d-flex column justify-center align-center">
-        <h1 id="active_city"></h1>
-        <div class="weather_container d-flex justify-center align-center">
-          <h1 id="temp"></h1>
-        </div>
-      </div>
-      <!-- cards -->
-      <div class="data_container d-flex align-center full-width">
-        <div class="skeleton reco_card">
-          <div class="loading-div">
-            <div class="loader"></div>
+      <div class="container">
+        <div class="head_container d-flex column justify-center align-center">
+          <h1 id="active_city"></h1>
+          <div class="weather_container d-flex justify-center align-center">
+            <h1 id="temp"></h1>
           </div>
-          <p id="todayReco"></p>
         </div>
+        <!-- cards -->
+        <div class="data_container d-flex align-center full-width">
+          <div class="skeleton reco_card atmosud">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+            <p id="todayReco"></p>
+          </div>
 
-        <div class="skeleton iqa_container" data-target="#iqa_modal">
-          <div class="loading-div">
-            <div class="loader"></div>
+          <div class="skeleton iqa_container atmosud">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+            <div class="iqa_value" data-target="#iqa_modal"></div>
+            <div class="iqa-meter">
+              <div class="fill-gauge"></div>
+            </div>
+            <div class="ovl" data-target="#iqa_modal"></div>
           </div>
-          <div class="iqa_value"></div>
-          <div class="iqa-meter">
-            <div class="fill-gauge"></div>
-          </div>
-        </div>
 
-        <div
-          data-target="#particles_modal"
-          class="skeleton particles_container d-flex align-center justify-center column"
-        >
-          <div class="loading-div">
-            <div class="loader"></div>
+          <div
+            data-target="#particles_modal"
+            class="skeleton particles_container d-flex align-center justify-center column atmosud"
+          >
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+            <h3 class="particles" id="p0"></h3>
+            <h3 class="particles" id="p1"></h3>
+            <h3 class="particles" id="p2"></h3>
+            <h3 class="particles" id="p3"></h3>
+            <h3 class="particles" id="p4"></h3>
+            <div class="ovl" data-target="#particles_modal"></div>
           </div>
-          <h3 class="particles" id="p0"></h3>
-          <h3 class="particles" id="p1"></h3>
-          <h3 class="particles" id="p2"></h3>
-          <h3 class="particles" id="p3"></h3>
-          <h3 class="particles" id="p4"></h3>
-        </div>
 
-        <div class="embed_map skeleton">
-          <div class="loading-div">
-            <div class="loader"></div>
+          <div class="embed skeleton embed_map">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
           </div>
-        </div>
-        <div class="embed_map skeleton">
-          <div id="graph"></div>
+          <div class="embed skeleton graph_load">
+            <div id="graph"></div>
 
-          <div class="loading-div">
-            <div class="loader"></div>
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -86,6 +185,7 @@
 
     <!-- JS FILES -->
     <script src="./assets/app/dayLight.js"></script>
-    <script src="./assets/app/compute.js"></script>
+    <script src="./assets/app/compute.js" type="text/javascript"></script>
+    <script src="./assets/app/index.js" type="text/javascript"></script>
   </body>
 </html>
