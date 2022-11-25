@@ -138,33 +138,7 @@ function display_infos(data) {
 
 /* #### METEO MATICS #### */
 //fetch from meteomatics
-
-// How to fetch data using token authentication
 async function weatherInformations(x, y) {
-  const url = `https://api.meteomatics.com/${new Date().toISOString()}/t_2m:C,weather_symbol_1h:idx/${y},${x}/json`;
-  const username = "iut_lambert";
-  const password = "zv6g5ZwFK7";
-
-  const tokenResponse = await fetch(
-    "https://login.meteomatics.com/api/v1/token",
-    {
-      headers: new Headers({
-        Authorization: "Basic " + btoa(`${username}:${password}`),
-        "Access-Control-Allow-Origin": "*",
-      }),
-    }
-  );
-  const tokenJson = await tokenResponse.json();
-  const accessToken = tokenJson["access_token"];
-  const response2 = await fetch(url, {
-    headers: new Headers({
-      Authorization: `Bearer ${accessToken}`,
-    }),
-  });
-  const json = await response2.json();
-  console.log("\nAPI Result2:\n", json);
-}
-/* async function weatherInformations(x, y) {
   let username = "iut_lambert";
   let password = "zv6g5ZwFK7";
 
@@ -180,7 +154,7 @@ async function weatherInformations(x, y) {
   );
   const data = await response.json();
   call_weather(data);
-} */
+}
 
 //display weather informations
 function call_weather(data) {
