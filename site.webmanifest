@@ -1,7 +1,7 @@
 {
   "name": "SANTÉ SUD",
   "short_name": "santesud",
-  "theme_color": "#0084ff",
+  "theme_color": "rgba(0,0,0,0)",
   "background_color": "#2e437e",
   "display": "standalone",
   "orientation": "portrait",
