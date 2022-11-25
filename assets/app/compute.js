@@ -149,7 +149,8 @@ async function weatherInformations(x, y) {
     {
       headers: new Headers({
         Authorization: "Basic " + btoa(`${username}:${password}`),
-        "Access-Control-Allow-Origin": "*",
+        mode: "no-cors",
+        /*         "Access-Control-Allow-Origin": "*",
 
         "Content-Type": "application/json",
 
@@ -159,7 +160,7 @@ async function weatherInformations(x, y) {
           "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
         "Access-Control-Allow-Credentials": "true",
         "Access-Control-Max-Age": "86400",
-        "Access-Control-Expose-Headers": "Content-Length, X-JSON",
+        "Access-Control-Expose-Headers": "Content-Length, X-JSON", */
       }),
     }
   );
