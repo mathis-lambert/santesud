@@ -1,3 +1,10 @@
 {
-  "name": "SANTE SUD"
+  "name": "SANTÉ SUD",
+  "short_name": "santesud",
+  "theme_color": "#0084ff",
+  "background_color": "#2e437e",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/"
 }
