@@ -144,6 +144,9 @@ async function weatherInformations(x, y) {
 
   let actualDate = new Date();
 
+  let tenDaysForecast = new Date().setDate(actualDate.getDate() + 9);
+  let tenDays = new Date(tenDaysForecast).toISOString();
+
   const response = await fetch(
     `https://api.meteomatics.com/${actualDate.toISOString()}/t_2m:C,weather_symbol_1h:idx/${y},${x}/json`,
     {
@@ -152,8 +155,20 @@ async function weatherInformations(x, y) {
       }),
     }
   );
+
+  const response2 = await fetch(
+    `https://api.meteomatics.com/${actualDate.toISOString()}--${tenDays}:PT24H/t_2m:C/${y},${x}/json`,
+    {
+      headers: new Headers({
+        Authorization: "Basic " + btoa(`${username}:${password}`),
+      }),
+    }
+  );
+
   const data = await response.json();
+  const data2 = await response2.json();
   call_weather(data);
+  call_forecast(data2);
 }
 
 //display weather informations
@@ -175,6 +190,71 @@ function call_weather(data) {
   document.querySelector(
     ".weather_container"
   ).innerHTML += `<img src="assets/icons/${weatherIconIndex}.png" alt="weather icon" id="weatherIcon" />`;
+}
+
+//display forecast
+function call_forecast(data) {
+  c("forecast", data);
+  let forecastTemperature = [];
+  let forecastDates = [];
+
+  let options = {
+    day: "numeric",
+    month: "short",
+  };
+
+  data.data[0].coordinates[0].dates.forEach((e) => {
+    forecastTemperature.push(Math.floor(e.value));
+    forecastDates.push(new Date(e.date).toLocaleDateString("fr-FR", options));
+  });
+
+  c("forecastTemperature", forecastTemperature, "forecastDates", forecastDates);
+
+  temperature_graph(forecastTemperature, forecastDates);
+}
+
+function temperature_graph(forecastTemperature, forecastDates) {
+  hide_loaders(".meteomatics");
+
+  const trace1 = {
+    x: forecastDates,
+    y: forecastTemperature,
+    name: city,
+    histnorm: "Degrés",
+    textposition: "auto",
+    font: {
+      color: "#fff",
+    },
+    marker: {
+      color: "rgba(60, 60, 255, 1)",
+      size: 7.5,
+    },
+    type: "line",
+    line: {
+      color: "rgba(255, 255, 255, 1)",
+      width: 3,
+    },
+  };
+
+  const graph_array = [trace1];
+
+  const layout = {
+    title: "Températures moyennes <br> pour les 10 prochains jours",
+    xaxis: { title: "Heures" },
+    yaxis: {
+      title: "Température",
+      /* range: [0, 7], */
+    },
+    height: 275,
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)",
+    font: {
+      color: "white",
+    },
+    dragmode: true,
+  };
+
+  Plotly.newPlot("temp_graph", graph_array, layout, { responsive: true });
 }
 
 // call historical datas of IQA through the past year and display it in a chart
@@ -268,7 +348,10 @@ function iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis) {
     },
     marker: {
       color: "rgba(255, 44, 122, 1)",
-      width: 1,
+      size: 7.5,
+    },
+    line: {
+      width: 1.5,
     },
     type: "line",
   };
@@ -285,7 +368,10 @@ function iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis) {
     },
     marker: {
       color: "rgba(44, 122, 255, 1)",
-      width: 1,
+      size: 7.5,
+    },
+    line: {
+      width: 1.5,
     },
     type: "line",
   };
@@ -302,7 +388,10 @@ function iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis) {
     },
     marker: {
       color: "rgba(200, 255, 122, 1)",
-      width: 1,
+      size: 7.5,
+    },
+    line: {
+      width: 1.5,
     },
     type: "line",
   };

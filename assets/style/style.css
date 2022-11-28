@@ -32,7 +32,7 @@ body {
   padding: 5vw;
 }
 .homeContainer h1 {
-  font-size: 5rem;
+  font-size: clamp(3rem, 5vw, 4rem);
   margin-bottom: 3rem;
 }
 .homeContainer .text-stroke {
@@ -58,7 +58,7 @@ body {
   border-radius: 50px;
   width: 100%;
   padding: 0.5rem 1.5rem;
-  font-size: clamp(1rem, 2vw, 2.5rem);
+  font-size: clamp(1.2rem, 3vw, 2.5rem);
   color: #424dae;
 }
 .homeContainer .inputAndResult .inputContainer input:focus {
@@ -81,23 +81,29 @@ body {
   width: 100%;
   top: 50%;
   z-index: 0;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 .homeContainer .inputAndResult .results ul {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  list-style: none;
 }
 .homeContainer .inputAndResult .results ul li {
   position: relative;
-  margin-block: 0.5rem;
-  margin-inline: 3rem;
+  margin-block: 0.35rem;
+  margin-inline: 1.5rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
+.homeContainer .inputAndResult .results ul li h2 {
+  font-size: clamp(1rem, 4vw, 1.6rem);
+  font-weight: 600;
+}
 .homeContainer .inputAndResult .results ul li:first-child {
-  margin-top: 3rem;
+  margin-top: 2.5em;
 }
 .homeContainer .inputAndResult .results ul li::after {
   content: "";
@@ -107,19 +113,8 @@ body {
   background-color: #bebebe;
   bottom: -1rem;
 }
-.homeContainer .inputAndResult .results ul li::before {
-  content: "";
-  position: absolute;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #000000;
-  left: -1.5rem;
-}
 .homeContainer .inputAndResult .results ul li:last-child {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .homeContainer .inputAndResult .results ul li:last-child::after {
   content: none;
@@ -130,7 +125,7 @@ body {
   color: #fff;
   border-radius: 50px;
   padding: 0.5rem 1rem;
-  font-size: 1rem;
+  font-size: clamp(0.75rem, 2vw, 1rem);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -498,7 +493,7 @@ body {
   height: fit-content;
   padding: 1rem;
   border-radius: 1.5rem;
-  background-color: hsla(225deg, 25%, 50%, 0.5);
+  background-color: hsla(225deg, 25%, 50%, 0.25);
   box-shadow: inset 0 0 0 0.25px rgb(171, 171, 171);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
@@ -509,7 +504,7 @@ body {
   flex: 0 1 auto;
   aspect-ratio: 1/1;
   border-radius: 1.5rem;
-  background-color: hsla(225deg, 25%, 50%, 0.5);
+  background-color: hsla(225deg, 25%, 50%, 0.25);
   box-shadow: 0 0 0 0.25px rgb(171, 171, 171);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
@@ -587,9 +582,6 @@ p {
 .particles_container {
     flex: 1 0 45%;
     max-height: 220px;
-  }
-  .homeContainer h1 {
-    font-size: 4rem;
   }
 }
 @media screen and (min-width: 768px) {
