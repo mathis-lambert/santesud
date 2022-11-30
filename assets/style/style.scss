@@ -448,9 +448,14 @@ body {
   }
 }
 
+.embed {
+  width: 100%;
+}
+
 .reco_card,
 .embed {
   flex: 1 1 50%;
+
   height: fit-content;
   padding: 1rem;
   border-radius: 1.5rem;
@@ -478,8 +483,12 @@ body {
   z-index: 2;
 }
 
-.iqa_container {
+.iqa_container,
+.particles_container {
   position: relative;
+}
+
+.iqa_container {
   .iqa_value {
     position: absolute;
     z-index: 102;
