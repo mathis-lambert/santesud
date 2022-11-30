@@ -1,4 +1,5 @@
 const c = console.log.bind(console);
+Chart.defaults.color = "#fff";
 // get page parameters with let
 let params = new URLSearchParams(window.location.search);
 let insee = params.get("insee");
@@ -56,7 +57,9 @@ function hide_loaders(parent) {
 
 function load_error(parent) {
   let c = document.querySelector(parent);
-  c.querySelector(".loading-div").style.borderTop = "4px solid #FF0000";
+  c.querySelectorAll(".loading-div .ball").forEach((e) => {
+    e.style.backgroundColor = "red";
+  });
   c.classList.remove("skeleton");
   c.innerHTML += "Erreur de chargement";
 }
@@ -136,6 +139,20 @@ function display_infos(data) {
   }
 }
 
+fetch(`https://api.atmosud.org/siam/v1/communes/${insee}`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    display_infos(data.data);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
 /* #### METEO MATICS #### */
 //fetch from meteomatics
 async function weatherInformations(x, y) {
@@ -194,9 +211,7 @@ function call_weather(data) {
 
 //display forecast
 function call_forecast(data) {
-  c("forecast", data);
-  let forecastTemperature = [];
-  let forecastDates = [];
+  let forecast = [];
 
   let options = {
     day: "numeric",
@@ -204,57 +219,44 @@ function call_forecast(data) {
   };
 
   data.data[0].coordinates[0].dates.forEach((e) => {
-    forecastTemperature.push(Math.floor(e.value));
-    forecastDates.push(new Date(e.date).toLocaleDateString("fr-FR", options));
+    let forecastObject = {
+      date: new Date(e.date).toLocaleDateString("fr-FR", options),
+      temperature: Math.floor(e.value),
+    };
+    forecast.push(forecastObject);
   });
 
-  c("forecastTemperature", forecastTemperature, "forecastDates", forecastDates);
-
-  temperature_graph(forecastTemperature, forecastDates);
+  temperature_graph(forecast);
 }
 
-function temperature_graph(forecastTemperature, forecastDates) {
+function temperature_graph(forecast) {
   hide_loaders(".meteomatics");
-
-  const trace1 = {
-    x: forecastDates,
-    y: forecastTemperature,
-    name: city,
-    histnorm: "Degrés",
-    textposition: "auto",
-    font: {
-      color: "#fff",
-    },
-    marker: {
-      color: "rgba(60, 60, 255, 1)",
-      size: 7.5,
-    },
+  const cfg = {
     type: "line",
-    line: {
-      color: "rgba(255, 255, 255, 1)",
-      width: 3,
+    data: {
+      labels: forecast.map((e) => e.date),
+      datasets: [
+        {
+          label: "Température",
+          data: forecast.map((e) => e.temperature),
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgba(255, 99, 132, 1)",
+          tension: 0.3,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+      responsive: true,
+      maintainAspectRatio: false,
     },
   };
 
-  const graph_array = [trace1];
-
-  const layout = {
-    title: "Températures moyennes <br> pour les 10 prochains jours",
-    xaxis: { title: "Heures" },
-    yaxis: {
-      title: "Température",
-      /* range: [0, 7], */
-    },
-    height: 275,
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(0,0,0,0)",
-    font: {
-      color: "white",
-    },
-    dragmode: true,
-  };
-
-  Plotly.newPlot("temp_graph", graph_array, layout, { responsive: true });
+  new Chart(document.getElementById("temp_graph"), cfg);
 }
 
 // call historical datas of IQA through the past year and display it in a chart
@@ -290,17 +292,17 @@ const fetchIQA_average = async () => {
   const data = await response.json();
   const marseilleData = await marseille.json();
   const toulonData = await toulon.json();
-  c(data, marseilleData, toulonData);
+
   return [data, marseilleData, toulonData];
 };
 
 fetchIQA_average()
   .then((data) => {
+    hide_loader(".graph_load");
+
     let iqaData = data[0][0].bulletins;
     let marseilleData = data[1][0].bulletins;
     let toulonData = data[2][0].bulletins;
-
-    hide_loader(".graph_load");
 
     const [yAxis, MarseilleAxis, ToulonAxis] = [[], [], []];
 
@@ -336,83 +338,45 @@ fetchIQA_average()
   });
 
 function iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis) {
-  const trace1 = {
-    x: months,
-    y: yAxis,
-    name: city,
-    histnorm: "Degrés",
-    text: yAxis.map(String),
-    textposition: "auto",
-    font: {
-      color: "#fff",
-    },
-    marker: {
-      color: "rgba(255, 44, 122, 1)",
-      size: 7.5,
-    },
-    line: {
-      width: 1.5,
-    },
+  const cfg = {
     type: "line",
+    data: {
+      labels: months,
+      datasets: [
+        {
+          label: "Marseille",
+          data: MarseilleAxis,
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgba(255, 99, 132, 1)",
+          tension: 0.3,
+        },
+        {
+          label: "Toulon",
+          data: ToulonAxis,
+          backgroundColor: "rgba(235, 235, 54, 0.2)",
+          borderColor: "rgba(235, 235, 54, 1)",
+          tension: 0.3,
+        },
+        {
+          label: city,
+          data: yAxis,
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          tension: 0.3,
+        },
+      ],
+    },
+
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+    },
   };
 
-  const marseille_path = {
-    x: months,
-    y: MarseilleAxis,
-    name: "Marseille",
-    histnorm: "Degrés",
-    text: MarseilleAxis.map(String),
-    textposition: "auto",
-    font: {
-      color: "#fff",
-    },
-    marker: {
-      color: "rgba(44, 122, 255, 1)",
-      size: 7.5,
-    },
-    line: {
-      width: 1.5,
-    },
-    type: "line",
-  };
-
-  const toulon_path = {
-    x: months,
-    y: ToulonAxis,
-    name: "Toulon",
-    histnorm: "Degrés",
-    text: ToulonAxis.map(String),
-    textposition: "auto",
-    font: {
-      color: "#fff",
-    },
-    marker: {
-      color: "rgba(200, 255, 122, 1)",
-      size: 7.5,
-    },
-    line: {
-      width: 1.5,
-    },
-    type: "line",
-  };
-
-  const graph_array = [trace1, marseille_path, toulon_path];
-
-  const layout = {
-    title: "Moyenne de la qualité de l'air <br> sur l'année passée",
-    xaxis: { title: "Mois" },
-    yaxis: {
-      title: "Indice",
-      /* range: [0, 7], */
-    },
-    height: 275,
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(0,0,0,0)",
-    font: {
-      color: "white",
-    },
-    dragmode: true,
-  };
-
-  Plotly.newPlot("graph", graph_array, layout, { responsive: true });
+  new Chart(document.getElementById("iqa_graph"), cfg);
 }

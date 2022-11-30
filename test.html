@@ -19,27 +19,15 @@
     <div class="square"></div>
 
     <script>
-      const url =
-        "https://api.meteomatics.com/2022-10-25T00:00:00Z/t_2m:C/52.520551,13.461804/json";
-      const username = "iut_lambert";
-      const password = "zv6g5ZwFK7";
-      const tokenUrl = "https://login.meteomatics.com/api/v1/token";
-
-      async function basicAuthFetch() {
-        const response1 = await fetch(url, {
-          headers: new Headers({
-            Authorization: "Basic " + btoa(`${username}:${password}`),
-          }),
-        });
-        const json = await response1.json();
-
-        return json;
-      }
-      // Run fetch
-      basicAuthFetch().then((data) => {
+      let xhr = new XMLHttpRequest();
+      xhr.open("get", "https://api.atmosud.org/siam/v1/communes/13005");
+      xhr.send();
+      xhr.onload = function () {
+        let data = JSON.parse(xhr.response);
         console.log(data);
-        const temp = data.data[0].coordinates[0].dates[0].value;
-      });
+        document.getElementById("IQA").innerHTML =
+          data.data.commentaires["2022-11-30"];
+      };
     </script>
   </body>
 </html>

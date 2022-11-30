@@ -4,10 +4,10 @@ let hour = date.getHours();
 console.log(hour);
 
 let bgGradients = {
-  earlyMorning: "linear-gradient(0deg, rgb(199 108 46), rgb(35 101 184))",
-  morning: "linear-gradient(0deg, rgb(237 238 255), rgb(0 116 224))",
-  afternoon: "linear-gradient(0deg, rgb(237 238 255), rgb(0 116 224))",
-  evening: "linear-gradient(0deg, rgb(199 108 46), rgb(35 101 184))",
+  earlyMorning: "linear-gradient(0deg, rgb(182 81 49), rgb(35 101 184))",
+  morning: "linear-gradient(0deg, rgb(202 228 255), rgb(2 83 158))",
+  afternoon: "linear-gradient(0deg, rgb(202 228 255), rgb(2 83 158))",
+  evening: "linear-gradient(0deg, rgb(182 81 49), rgb(35 101 184))",
   night: "linear-gradient(0deg, rgb(58 84 136), rgb(1 21 40))",
 };
 
