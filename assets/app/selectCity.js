@@ -23,7 +23,6 @@ async function getCities(e) {
 // compute city list if the promise is resolved
 input.addEventListener("input", (e) => {
   let value = e.target.value;
-  console.log(value, value.length);
   if (Boolean(value) && value.trim().length > 0) {
     getCities(value).then(
       (cities) => {
@@ -49,7 +48,9 @@ function logData(data) {
 
     let content = `<li class="result">
                     <h2 class="result-title">${city}</h2>
-                    <button onClick="openLink('${data[i].code}',(\'${city}\'))">Valider</button>
+                    <button onClick="openLink('${data[i].code}',(\'${city}\'))"><svg xmlns="http://www.w3.org/2000/svg" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+</svg></button>
                   </li>`;
     list.innerHTML += content;
   }

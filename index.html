@@ -14,10 +14,20 @@
   <body>
     <div class="homeContainer">
       <h1 class="main-title text-stroke">SANTE SUD</h1>
-
+      <div class="current_city d-flex align-center">
+        <div>
+          <h2 class="current_city-title">Votre ville</h2>
+          <div class="current_city-content">
+            <div class="current_city-content--city">
+              <p class="current_city-content--city-name" id="current_city"></p>
+            </div>
+          </div>
+        </div>
+        <div id="current_city_link"></div>
+      </div>
       <div class="inputAndResult">
         <div class="inputContainer">
-          <label for="chooseCity">Rentrez votre ville :</label>
+          <label for="chooseCity">Rentrez une ville :</label>
           <input type="text" name="ville" id="chooseCity" />
         </div>
 
@@ -33,5 +43,33 @@
     <!-- Javascript import files -->
     <script src="./assets/app/dayLight.js"></script>
     <script src="assets/app/selectCity.js"></script>
+    <script>
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          //ask geo.gouv.fr for the city name
+          fetch(
+            `https://api-adresse.data.gouv.fr/reverse/?lon=${position.coords.longitude}&lat=${position.coords.latitude}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              document.getElementById("current_city").innerHTML =
+                data.features[0].properties.city;
+
+              document.getElementById(
+                "current_city_link"
+              ).innerHTML = `<a href="./view.html?insee=${data.features[0].properties.citycode}&ville=${data.features[0].properties.city}" class="btn">Voir</a>`;
+            });
+
+          // if user didn't allow geolocation
+        },
+        (error) => {
+          console.log(error);
+          document.getElementById("current_city").innerHTML =
+            "Vous n'avez pas autorisé la géolocalisation";
+        }
+      );
+    </script>
   </body>
 </html>

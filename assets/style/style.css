@@ -39,7 +39,8 @@ body {
   -webkit-text-stroke: #fff 1px;
   color: transparent;
 }
-.homeContainer .inputAndResult {
+
+.inputAndResult {
   display: flex;
   max-width: 100%;
   flex-direction: column;
@@ -48,23 +49,23 @@ body {
   margin-top: 3rem;
   position: relative;
 }
-.homeContainer .inputAndResult .inputContainer {
+.inputAndResult .inputContainer {
   position: relative;
   width: 100%;
   z-index: 1;
 }
-.homeContainer .inputAndResult .inputContainer input {
+.inputAndResult .inputContainer input {
   border: solid 3px #424dae;
   border-radius: 50px;
   width: 100%;
   padding: 0.5rem 1.5rem;
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-size: clamp(1.2rem, 3vw, 1.75rem);
   color: #424dae;
 }
-.homeContainer .inputAndResult .inputContainer input:focus {
+.inputAndResult .inputContainer input:focus {
   outline: none;
 }
-.homeContainer .inputAndResult .inputContainer label {
+.inputAndResult .inputContainer label {
   position: absolute;
   top: -2.5rem;
   left: 0;
@@ -74,7 +75,7 @@ body {
   pointer-events: none;
   transition: all 0.3s ease;
 }
-.homeContainer .inputAndResult .results {
+.inputAndResult .results {
   position: absolute;
   background-color: white;
   border: solid 3px #424dae;
@@ -84,13 +85,13 @@ body {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
-.homeContainer .inputAndResult .results ul {
+.inputAndResult .results ul {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   list-style: none;
 }
-.homeContainer .inputAndResult .results ul li {
+.inputAndResult .results ul li {
   position: relative;
   margin-block: 0.35rem;
   margin-inline: 1.5rem;
@@ -98,14 +99,14 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-.homeContainer .inputAndResult .results ul li h2 {
-  font-size: clamp(1rem, 4vw, 1.6rem);
+.inputAndResult .results ul li h2 {
+  font-size: clamp(1rem, 3vw, 1.4rem);
   font-weight: 600;
 }
-.homeContainer .inputAndResult .results ul li:first-child {
+.inputAndResult .results ul li:first-child {
   margin-top: 2.5em;
 }
-.homeContainer .inputAndResult .results ul li::after {
+.inputAndResult .results ul li::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -113,25 +114,36 @@ body {
   background-color: #bebebe;
   bottom: -1rem;
 }
-.homeContainer .inputAndResult .results ul li:last-child {
+.inputAndResult .results ul li:last-child {
   margin-bottom: 1rem;
 }
-.homeContainer .inputAndResult .results ul li:last-child::after {
+.inputAndResult .results ul li:last-child::after {
   content: none;
 }
-.homeContainer .inputAndResult .results ul button {
+.inputAndResult .results ul button {
   background-color: #424dae;
   border: solid 2px #424dae;
   color: #fff;
   border-radius: 50px;
-  padding: 0.5rem 1rem;
-  font-size: clamp(0.75rem, 2vw, 1rem);
+  padding: 0.5rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.homeContainer .inputAndResult .results ul button:hover {
+.inputAndResult .results ul button:hover {
   background-color: #ffffff;
   color: #424dae;
+}
+.inputAndResult .results ul button:hover svg {
+  fill: #424dae;
+}
+.inputAndResult .results ul button svg {
+  fill: white;
+  width: 1.5rem;
+  aspect-ratio: 1;
 }
 
 .blur-bg-modal {
@@ -207,51 +219,6 @@ body {
   font-size: 1rem;
   margin-bottom: 1rem;
   color: #000000;
-}
-.modal .modal-content .inputContainer {
-  position: relative;
-  width: 100%;
-  z-index: 1;
-}
-.modal .modal-content .inputContainer input {
-  border: solid 3px #424dae;
-  border-radius: 50px;
-  width: 100%;
-  padding: 0.5rem 1.5rem;
-  font-size: clamp(1rem, 2vw, 2.5rem);
-  color: #424dae;
-}
-.modal .modal-content .inputContainer input:focus {
-  outline: none;
-}
-.modal .modal-content .inputContainer label {
-  position: absolute;
-  top: -2.5rem;
-  left: 0;
-  padding: 0.5rem 1.5rem;
-  font-size: 1.5rem;
-  color: #fff;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-.modal .modal-content .buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-}
-.modal .modal-content .buttonContainer button {
-  background-color: #424dae;
-  border: solid 2px #424dae;
-  color: #fff;
-  border-radius: 50px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.modal .modal-content .buttonContainer button:hover {
-  background-color: #ffffff;
-  color: #424dae;
 }
 
 .loading-div {
@@ -369,14 +336,153 @@ body {
   }
 }
 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+}
+header .header_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  max-width: 1400px;
+  position: relative;
+}
+header .header_container #active_city {
+  color: #000000;
+}
+header .header_container .nav {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+header .header_container .nav .search_container {
+  position: relative;
+}
+header .header_container .nav .search_icon {
+  position: relative;
+  cursor: pointer;
+  background-color: #424dae;
+  border: #424dae 2px solid;
+  border-radius: 50%;
+  padding: 0.75rem;
+  aspect-ratio: 1;
+  width: 50px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+header .header_container .nav .search_icon svg {
+  aspect-ratio: 1;
+  width: 1.5rem;
+  fill: white;
+}
+header .header_container .nav .search_icon:hover {
+  background-color: white;
+}
+header .header_container .nav .search_icon:hover svg {
+  fill: #424dae;
+}
+header .inputAndResult {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  top: 0;
+  width: 0;
+  right: 0;
+  transition: all 0.3s ease;
+  max-width: none;
+  margin: 0;
+  z-index: 1;
+}
+header .inputAndResult.active {
+  right: 4rem;
+  width: 250px;
+  opacity: 1;
+  visibility: visible;
+}
+header .inputAndResult .inputContainer input {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+}
+header .inputAndResult .results {
+  position: absolute;
+  background-color: white;
+  border: solid 3px #424dae;
+  width: 100%;
+  top: 50%;
+  z-index: 0;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+header .inputAndResult .results ul li {
+  margin-inline: 1rem;
+}
+header .inputAndResult .results ul li h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+header .inputAndResult .results ul li:first-child {
+  margin-top: 2em;
+}
+header .inputAndResult .results ul li::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #bebebe;
+  bottom: -1rem;
+}
+header .inputAndResult .results ul li:last-child {
+  margin-bottom: 0.75rem;
+}
+header .inputAndResult .results ul button {
+  background-color: #424dae;
+  border: solid 2px #424dae;
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.25rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+header .inputAndResult .results ul button:hover {
+  background-color: #ffffff;
+  color: #424dae;
+}
+header .inputAndResult .results ul button:hover svg {
+  fill: #424dae;
+}
+header .inputAndResult .results ul button svg {
+  fill: white;
+  width: 1.5rem;
+  aspect-ratio: 1;
+}
+
 .page_container {
   width: 100%;
   padding: 1rem;
-  padding-top: 5rem;
-  margin-top: 1rem;
+  margin-top: 5rem;
+  margin-bottom: 1rem;
   position: relative;
   z-index: 100;
-  height: calc(100vh - 2rem);
+  height: calc(100vh - 6rem);
   overflow-y: scroll;
   /* total width */
   /* background of the scrollbar except button or resizer */
@@ -441,6 +547,12 @@ body {
     background-color: hsla(225deg, 25%, 50%, 0.75);
   }
 }
+.current_city {
+  width: 100%;
+  max-width: 400px;
+  justify-content: space-between;
+}
+
 .d-flex {
   display: flex;
 }
@@ -459,6 +571,26 @@ body {
 
 .column {
   flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: #424dae;
+}
+
+.btn {
+  background-color: #424dae;
+  border: solid 2px #424dae;
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background-color: #ffffff;
+  color: #424dae;
 }
 
 .data_container {

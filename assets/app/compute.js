@@ -165,7 +165,7 @@ async function weatherInformations(x, y) {
   let tenDays = new Date(tenDaysForecast).toISOString();
 
   const response = await fetch(
-    `https://api.meteomatics.com/${actualDate.toISOString()}/t_2m:C,weather_symbol_1h:idx/${y},${x}/json`,
+    `https://api.meteomatics.com/${actualDate.toISOString()}/t_2m:C,weather_symbol_1h:idx,wind_speed_10m:ms,wind_dir_10m:d,sunrise:sql,sunset:sql/${y},${x}/json`,
     {
       headers: new Headers({
         Authorization: "Basic " + btoa(`${username}:${password}`),
@@ -184,6 +184,7 @@ async function weatherInformations(x, y) {
 
   const data = await response.json();
   const data2 = await response2.json();
+  c(data);
   call_weather(data);
   call_forecast(data2);
 }
@@ -253,6 +254,15 @@ function temperature_graph(forecast) {
       },
       responsive: true,
       maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: `Prévisions des températures à ${new Date().getHours()}h sur 10 jours`,
+          font: {
+            size: 15,
+          },
+        },
+      },
     },
   };
 
@@ -375,6 +385,15 @@ function iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis) {
       },
       responsive: true,
       maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: "Moyennes des IQA sur les 3 derniers mois",
+          font: {
+            size: 15,
+          },
+        },
+      },
     },
   };
 
