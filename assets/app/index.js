@@ -75,6 +75,8 @@ if (!checkCookie("favoris")) {
   addCookie("favoris", "[]");
 }
 
+console.log(cookie_star, "cookie_star");
+
 // add or remove city from favorites
 if (cookie_star) {
   let cityInformationsGet = new URLSearchParams(window.location.search);
