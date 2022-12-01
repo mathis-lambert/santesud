@@ -54,6 +54,9 @@ const removeCity = (arr, e) => arr.filter((el) => el !== e);
 // tester si ville existe dans le cookie
 const checkCity = (arr, e) => arr.includes(e);
 
+if (!checkCookie("favoris")) {
+  addCookie("favoris", "[]");
+}
 //mettre a jour le menu
 const updateMenu = () => {
   //update side menu with cities
@@ -70,10 +73,6 @@ const updateMenu = () => {
   }
 };
 updateMenu();
-
-if (!checkCookie("favoris")) {
-  addCookie("favoris", "[]");
-}
 
 console.log(cookie_star, "cookie_star");
 
