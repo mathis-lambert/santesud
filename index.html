@@ -15,6 +15,53 @@
     <div class="gradient-bg"></div>
     <script src="./assets/app/dayLight.js"></script>
 
+    <header>
+      <div class="header_container">
+        <div class="search_container">
+          <div class="search_icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              />
+            </svg>
+          </div>
+          <div class="inputAndResult">
+            <div class="inputContainer">
+              <input type="text" name="ville" id="chooseCity" />
+            </div>
+
+            <div class="results">
+              <ul class="resultList"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="burger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="side-menu">
+        <div class="side-menu-container">
+          <div class="side-menu-content">
+            <div class="side-menu-header">
+              <h2>Vos villes favorites</h2>
+            </div>
+            <div class="side-menu-body">
+              <ul id="favCitiesList"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <script>
+      document.querySelector(".burger-menu").addEventListener("click", () => {
+        document.querySelector(".burger-menu").classList.toggle("active");
+        document.querySelector(".side-menu").classList.toggle("active");
+      });
+    </script>
+
     <div class="homeContainer">
       <h1 class="main-title text-stroke">SANTE SUD</h1>
       <div class="current_city d-flex align-center">

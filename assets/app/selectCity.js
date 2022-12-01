@@ -5,10 +5,13 @@ utilisation de l'API Atmosud pour récupérer les données
 
 */
 
-// declare selected elements
-const input = document.getElementById("chooseCity");
-const list = document.querySelector(".resultList");
+document.querySelector(".search_icon").addEventListener("click", () => {
+  document.getElementById("chooseCity").focus();
+  document.querySelector(".inputAndResult").classList.toggle("active");
+});
 
+// declare selected elements
+const inputs = document.querySelectorAll("#chooseCity");
 const MAX_RESULTS = 4;
 
 //fetch cities.json
@@ -21,27 +24,31 @@ async function getCities(e) {
 }
 
 // compute city list if the promise is resolved
-input.addEventListener("input", (e) => {
-  let value = e.target.value;
-  if (Boolean(value) && value.trim().length > 0) {
-    getCities(value).then(
-      (cities) => {
-        logData(cities);
-      },
-      (error) => {
-        clearList();
-        noResults();
-        console.log(error);
-      }
-    );
-  } else {
-    clearList();
-  }
+inputs.forEach((input) => {
+  const list = input.closest(".inputAndResult").querySelector(".resultList");
+  input.addEventListener("input", (e) => {
+    console.log(list);
+    let value = e.target.value;
+    if (value && value.trim().length > 0) {
+      getCities(value).then(
+        (cities) => {
+          logData(list, cities);
+        },
+        (error) => {
+          clearList(list);
+          noResults(list);
+          console.log(error);
+        }
+      );
+    } else {
+      clearList(list);
+    }
+  });
 });
 
 // loguer les données et les afficher dans la liste (3 max)
-function logData(data) {
-  clearList();
+function logData(list, data) {
+  clearList(list);
 
   for (let i = 0; i < data.length; i++) {
     let city = data[i].nom;
@@ -55,11 +62,11 @@ function logData(data) {
     list.innerHTML += content;
   }
 
-  data.length === 0 ? noResults() : "";
+  data.length === 0 ? noResults(list) : "";
 }
 
 // fonction pour afficher un message si aucune ville ne correspond à la recherche
-function noResults() {
+function noResults(list) {
   let content = `<li class="result">
                     <h2 class="result-title">Aucun résultat n'a été trouvé</h2>
                   </li>`;
@@ -67,8 +74,8 @@ function noResults() {
 }
 
 // nettoyer la liste
-function clearList() {
-  document.querySelector(".resultList").innerHTML = "";
+function clearList(list) {
+  list.innerHTML = "";
 }
 
 // fonction pour ouvrir le lien associé à la ville sélectionnée (code insee)

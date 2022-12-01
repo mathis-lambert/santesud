@@ -50,7 +50,8 @@ body {
 
 .inputAndResult {
   display: flex;
-  max-width: 100%;
+  max-width: 400px;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -75,10 +76,10 @@ body {
 }
 .inputAndResult .inputContainer label {
   position: absolute;
-  top: -2.5rem;
+  top: -2rem;
   left: 0;
   padding: 0.5rem 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #fff;
   pointer-events: none;
   transition: all 0.3s ease;
@@ -678,6 +679,9 @@ header .inputAndResult .results ul button svg {
   width: 100%;
   max-width: 400px;
   justify-content: space-between;
+}
+.current_city * {
+  color: white;
 }
 
 .d-flex {

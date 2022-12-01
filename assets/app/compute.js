@@ -56,18 +56,14 @@ function hide_loaders(parent) {
 }
 
 function load_error(parent) {
-  let c = document.querySelector(parent);
-  c.querySelectorAll(".loading-div .ball").forEach((e) => {
-    e.style.backgroundColor = "red";
+  let c = document.querySelectorAll(parent);
+  c.forEach((b) => {
+    b.querySelectorAll(".loading-div .ball").forEach((e) => {
+      e.style.backgroundColor = "red";
+    });
+    b.classList.remove("skeleton");
   });
-  c.classList.remove("skeleton");
-  c.innerHTML += "Erreur de chargement";
 }
-
-document.querySelector(".search_icon").addEventListener("click", () => {
-  document.getElementById("chooseCity").focus();
-  document.querySelector(".inputAndResult").classList.toggle("active");
-});
 
 if (city && insee) {
   document.querySelector("#active_city").innerHTML = city;
@@ -86,13 +82,17 @@ if (city && insee) {
 
   // fetching location coordinates to call meteomatics API
   (async () => {
-    const response = await fetch(
-      `https://api-adresse.data.gouv.fr/search/?q=${city}&limit=1`
-    );
-    const data = await response.json();
-    city_coord.x = data.features[0].geometry.coordinates[0];
-    city_coord.y = data.features[0].geometry.coordinates[1];
-    weatherInformations(city_coord.x, city_coord.y);
+    try {
+      const response = await fetch(
+        `https://api-adresse.data.gouv.fr/search/?q=${city}&limit=1`
+      );
+      const data = await response.json();
+      city_coord.x = data.features[0].geometry.coordinates[0];
+      city_coord.y = data.features[0].geometry.coordinates[1];
+      weatherInformations(city_coord.x, city_coord.y);
+    } catch (error) {
+      load_error(".forecast_container");
+    }
   })();
 } else {
   // if there is no city in the url, redirect to index.html
@@ -100,11 +100,15 @@ if (city && insee) {
 }
 
 async function getInfos(insee) {
-  const response = await fetch(
-    `https://api.atmosud.org/siam/v1/communes/${insee}`
-  );
-  const data = await response.json();
-  display_infos(data.data);
+  try {
+    const response = await fetch(
+      `https://api.atmosud.org/siam/v1/communes/${insee}`
+    );
+    const data = await response.json();
+    display_infos(data.data);
+  } catch (error) {
+    load_error(".atmosud");
+  }
 }
 
 function display_infos(data) {
@@ -144,20 +148,6 @@ function display_infos(data) {
   }
 }
 
-fetch(`https://api.atmosud.org/siam/v1/communes/${insee}`, {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-  .then((response) => response.json())
-  .then((data) => {
-    display_infos(data.data);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
-
 /* #### METEO MATICS #### */
 //fetch from meteomatics
 async function weatherInformations(x, y) {
@@ -169,25 +159,25 @@ async function weatherInformations(x, y) {
   let tenDaysForecast = new Date().setDate(actualDate.getDate() + 9);
   let tenDays = new Date(tenDaysForecast).toISOString();
 
-  const response = await fetch(
-    `https://api.meteomatics.com/${actualDate.toISOString()}/t_2m:C,weather_symbol_1h:idx,wind_speed_10m:ms,wind_dir_10m:d,sunrise:sql,sunset:sql/${y},${x}/json`,
-    {
-      headers: new Headers({
-        Authorization: "Basic " + btoa(`${username}:${password}`),
-      }),
-    }
-  );
-
-  const response2 = await fetch(
-    `https://api.meteomatics.com/${actualDate.toISOString()}--${tenDays}:PT24H/t_2m:C/${y},${x}/json`,
-    {
-      headers: new Headers({
-        Authorization: "Basic " + btoa(`${username}:${password}`),
-      }),
-    }
-  );
-
   try {
+    const response = await fetch(
+      `https://api.meteomatics.com/${actualDate.toISOString()}/t_2m:C,weather_symbol_1h:idx,wind_speed_10m:ms,wind_dir_10m:d,sunrise:sql,sunset:sql/${y},${x}/json`,
+      {
+        headers: new Headers({
+          Authorization: "Basic " + btoa(`${username}:${password}`),
+        }),
+      }
+    );
+
+    const response2 = await fetch(
+      `https://api.meteomatics.com/${actualDate.toISOString()}--${tenDays}:PT24H/t_2m:C/${y},${x}/json`,
+      {
+        headers: new Headers({
+          Authorization: "Basic " + btoa(`${username}:${password}`),
+        }),
+      }
+    );
+
     const data = await response.json();
     const data2 = await response2.json();
 
@@ -281,39 +271,43 @@ function temperature_graph(forecast) {
 
 // call historical datas of IQA through the past year and display it in a chart
 const fetchIQA_average = async () => {
-  const response = await fetch(
-    `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=${insee}&srid=2154&echeances=0&date_diff_min=${
-      new Date().getFullYear() - 1
-    }-${
-      new Date().getMonth() + 1
-    }-01&date_diff_max=${new Date().getFullYear()}-${
-      new Date().getMonth() + 1
-    }-01`
-  );
-  const marseille = await fetch(
-    `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=13055&srid=2154&echeances=0&date_diff_min=${
-      new Date().getFullYear() - 1
-    }-${
-      new Date().getMonth() + 1
-    }-01&date_diff_max=${new Date().getFullYear()}-${
-      new Date().getMonth() + 1
-    }-01`
-  );
-  const toulon = await fetch(
-    `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=83137&srid=2154&echeances=0&date_diff_min=${
-      new Date().getFullYear() - 1
-    }-${
-      new Date().getMonth() + 1
-    }-01&date_diff_max=${new Date().getFullYear()}-${
-      new Date().getMonth() + 1
-    }-01`
-  );
+  try {
+    const response = await fetch(
+      `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=${insee}&srid=2154&echeances=0&date_diff_min=${
+        new Date().getFullYear() - 1
+      }-${
+        new Date().getMonth() + 1
+      }-01&date_diff_max=${new Date().getFullYear()}-${
+        new Date().getMonth() + 1
+      }-01`
+    );
+    const marseille = await fetch(
+      `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=13055&srid=2154&echeances=0&date_diff_min=${
+        new Date().getFullYear() - 1
+      }-${
+        new Date().getMonth() + 1
+      }-01&date_diff_max=${new Date().getFullYear()}-${
+        new Date().getMonth() + 1
+      }-01`
+    );
+    const toulon = await fetch(
+      `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=83137&srid=2154&echeances=0&date_diff_min=${
+        new Date().getFullYear() - 1
+      }-${
+        new Date().getMonth() + 1
+      }-01&date_diff_max=${new Date().getFullYear()}-${
+        new Date().getMonth() + 1
+      }-01`
+    );
 
-  const data = await response.json();
-  const marseilleData = await marseille.json();
-  const toulonData = await toulon.json();
+    const data = await response.json();
+    const marseilleData = await marseille.json();
+    const toulonData = await toulon.json();
 
-  return [data, marseilleData, toulonData];
+    return [data, marseilleData, toulonData];
+  } catch (error) {
+    load_error(".graph_load");
+  }
 };
 
 fetchIQA_average()
@@ -353,7 +347,6 @@ fetchIQA_average()
     iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis);
   })
   .catch((error) => {
-    console.log("erreur de chargement des données", error);
     load_error(".graph_load");
   });
 
