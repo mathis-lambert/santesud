@@ -362,9 +362,9 @@ header .city_container {
 }
 header #star_cookie {
   position: absolute;
+  transform: translateY(-50%);
   top: 50%;
   right: -2rem;
-  transform: translateY(-50%);
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
@@ -377,16 +377,13 @@ header #star_cookie > svg {
 }
 header #star_cookie #star_filled {
   display: none;
-  visibility: hidden;
   fill: rgb(246, 209, 22);
 }
 header #star_cookie.active #star_filled {
   display: block;
-  visibility: visible;
 }
 header #star_cookie.active #star_empty {
   display: none;
-  visibility: hidden;
 }
 header .header_container {
   display: flex;
