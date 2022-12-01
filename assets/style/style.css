@@ -13,13 +13,22 @@
   left: -9999px;
 }
 
+html {
+  background-color: #424dae;
+}
+
 /* body */
 body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   height: 100%;
   min-height: 100vh;
-  background-attachment: fixed;
+}
+
+.gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
 }
 
 .homeContainer {
@@ -390,17 +399,12 @@ header .header_container {
 header .header_container #active_city {
   color: #000000;
 }
-header .header_container .nav {
+header .header_container .search_container {
   position: absolute;
-  right: 1rem;
-  display: flex;
-  gap: 1rem;
-}
-header .header_container .nav .search_container {
-  position: relative;
+  left: 1rem;
   z-index: 1000;
 }
-header .header_container .nav .search_icon {
+header .header_container .search_container .search_icon {
   position: relative;
   cursor: pointer;
   background-color: #424dae;
@@ -415,22 +419,24 @@ header .header_container .nav .search_icon {
   transition: all 0.3s ease;
   z-index: 2;
 }
-header .header_container .nav .search_icon svg {
+header .header_container .search_container .search_icon svg {
   aspect-ratio: 1;
   width: 1.5rem;
   fill: white;
 }
-header .header_container .nav .search_icon:hover {
+header .header_container .search_container .search_icon:hover {
   background-color: white;
 }
-header .header_container .nav .search_icon:hover svg {
+header .header_container .search_container .search_icon:hover svg {
   fill: #424dae;
 }
 header .header_container .burger-menu {
-  position: relative;
+  position: absolute;
+  right: 1rem;
   display: flex;
   cursor: pointer;
   width: 40px;
+  height: 40px;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
@@ -464,14 +470,14 @@ header .inputAndResult {
   opacity: 0;
   top: 0;
   width: 0;
-  right: 50%;
+  left: 50%;
   transition: all 0.3s ease;
   max-width: none;
   margin: 0;
   z-index: 1;
 }
 header .inputAndResult.active {
-  right: 4rem;
+  left: 4rem;
   width: 250px;
   opacity: 1;
 }
@@ -601,21 +607,6 @@ header .inputAndResult .results ul button svg {
   color: #424dae;
 }
 
-@media only screen and (max-width: 700px) {
-  header .header_container .nav {
-    width: 100%;
-    right: 0;
-    justify-content: space-between;
-    padding-inline: 1rem;
-  }
-  header .inputAndResult {
-    right: initial;
-    left: 50%;
-  }
-  header .inputAndResult.active {
-    left: 4rem;
-  }
-}
 .page_container {
   width: 100%;
   padding: 1rem;

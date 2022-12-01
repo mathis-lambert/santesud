@@ -11,7 +11,7 @@ let bgGradients = {
   night: "linear-gradient(0deg, rgb(58 84 136), rgb(1 21 40))",
 };
 
-let bgGradient = document.querySelector("body");
+let bgGradient = document.querySelector(".gradient-bg");
 
 if (hour >= 5 && hour < 9) {
   bgGradient.style.backgroundImage = bgGradients.earlyMorning;
