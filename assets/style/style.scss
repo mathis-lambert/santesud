@@ -336,11 +336,11 @@ header {
     /*    position: absolute;
     transform: translateY(-50%);
     top: 50%;
-    right: -2rem;
+    right: -2rem;*/
     width: 1.5rem;
-    height: 1.5rem; */
+    height: 1.5rem;
+    background-color: #424dae;
     cursor: pointer;
-    z-index: 994;
     > svg {
       fill: rgb(246, 209, 22);
       width: 100%;
@@ -351,6 +351,7 @@ header {
       fill: rgb(246, 209, 22);
     }
     &.active {
+      background-color: red;
       #star_filled {
         display: block;
       }

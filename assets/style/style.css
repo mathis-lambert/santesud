@@ -364,11 +364,11 @@ header #star_cookie {
   /*    position: absolute;
   transform: translateY(-50%);
   top: 50%;
-  right: -2rem;
+  right: -2rem;*/
   width: 1.5rem;
-  height: 1.5rem; */
+  height: 1.5rem;
+  background-color: #424dae;
   cursor: pointer;
-  z-index: 994;
 }
 header #star_cookie > svg {
   fill: rgb(246, 209, 22);
@@ -378,6 +378,9 @@ header #star_cookie > svg {
 header #star_cookie #star_filled {
   display: none;
   fill: rgb(246, 209, 22);
+}
+header #star_cookie.active {
+  background-color: red;
 }
 header #star_cookie.active #star_filled {
   display: block;
