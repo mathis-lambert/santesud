@@ -14,13 +14,13 @@ let bgGradients = {
 let bgGradient = document.querySelector("body");
 
 if (hour >= 5 && hour < 9) {
-  bgGradient.style.background = bgGradients.earlyMorning;
+  bgGradient.style.backgroundImage = bgGradients.earlyMorning;
 } else if (hour >= 9 && hour < 12) {
-  bgGradient.style.background = bgGradients.morning;
+  bgGradient.style.backgroundImage = bgGradients.morning;
 } else if (hour >= 12 && hour < 16) {
-  bgGradient.style.background = bgGradients.afternoon;
+  bgGradient.style.backgroundImage = bgGradients.afternoon;
 } else if (hour >= 16 && hour < 18) {
-  bgGradient.style.background = bgGradients.evening;
+  bgGradient.style.backgroundImage = bgGradients.evening;
 } else if (hour >= 18 || hour < 5) {
-  bgGradient.style.background = bgGradients.night;
+  bgGradient.style.backgroundImage = bgGradients.night;
 }
