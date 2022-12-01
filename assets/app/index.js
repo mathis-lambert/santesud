@@ -89,6 +89,7 @@ if (cookie_star) {
 
   cookie_star.addEventListener("click", () => {
     console.log("click");
+    alert("click");
     let list_of_favorite = JSON.parse(getCookie("favoris"));
     if (!checkCity(list_of_favorite, cityInformations)) {
       list_of_favorite.push(cityInformations);
