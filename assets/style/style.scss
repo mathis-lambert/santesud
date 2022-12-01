@@ -329,6 +329,7 @@ header {
 
   .city_container {
     position: relative;
+    z-index: 994;
   }
 
   #star_cookie {
@@ -339,6 +340,7 @@ header {
     width: 1.5rem;
     height: 1.5rem;
     cursor: pointer;
+    z-index: 994;
     > svg {
       fill: rgb(246, 209, 22);
       width: 100%;
@@ -453,7 +455,7 @@ header {
     margin: 0;
     z-index: 1;
     &.active {
-      left: 4rem;
+      left: 3rem;
       width: 250px;
       opacity: 1;
     }
@@ -462,12 +464,13 @@ header {
       input {
         padding: 0.5rem 0.75rem;
         font-size: 1.25rem;
+        border: 2px solid #424dae;
       }
     }
     .results {
       position: absolute;
       background-color: white;
-      border: solid 3px #424dae;
+      border: solid 2px #424dae;
       width: 100%;
       top: 50%;
       z-index: 0;
