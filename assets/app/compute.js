@@ -65,7 +65,7 @@ function load_error(parent) {
 }
 
 if (city && insee) {
-  document.querySelector("#active_city").innerHTML = city + "&nbsp;";
+  document.querySelector("#active_city").innerHTML = city;
 
   //call atmosud api with insee code
   getInfos(insee);

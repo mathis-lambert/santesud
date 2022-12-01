@@ -313,11 +313,46 @@ header {
   left: 0;
   width: 100%;
   height: 4rem;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f7f7f7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: center;
   z-index: 999;
+
+  .city_container {
+    position: relative;
+  }
+
+  #star_cookie {
+    position: absolute;
+    top: 50%;
+    right: -2rem;
+    transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    > svg {
+      fill: rgb(246, 209, 22);
+      width: 100%;
+      height: 100%;
+    }
+    #star_filled {
+      display: none;
+      visibility: hidden;
+      fill: rgb(246, 209, 22);
+    }
+    &.active {
+      #star_filled {
+        display: block;
+        visibility: visible;
+      }
+      #star_empty {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  }
+
   .header_container {
     display: flex;
     align-items: center;
@@ -336,6 +371,7 @@ header {
       gap: 1rem;
       .search_container {
         position: relative;
+        z-index: 1000;
       }
       .search_icon {
         position: relative;
@@ -343,15 +379,15 @@ header {
         background-color: #424dae;
         border: #424dae 2px solid;
         border-radius: 50%;
-        padding: 0.75rem;
+        padding: 0.5rem;
         aspect-ratio: 1;
-        width: 50px;
         color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
         z-index: 2;
+
         svg {
           aspect-ratio: 1;
           width: 1.5rem;
@@ -365,14 +401,49 @@ header {
         }
       }
     }
+    /* BURGER MENU */
+    .burger-menu {
+      position: relative;
+      display: flex;
+      cursor: pointer;
+      width: 40px;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: space-between;
+      padding-block: 0.5rem;
+      z-index: 1000;
+    }
+    .burger-menu span {
+      display: block;
+      width: 100%;
+      height: 4px;
+      border-radius: 15px;
+      background-color: #424dae;
+      transition: 0.5s ease;
+    }
+    .burger-menu.active span:nth-child(1) {
+      width: 80%;
+      transform: translateY(11px) rotate(135deg);
+    }
+    .burger-menu.active span:nth-child(2) {
+      width: 80%;
+      transform: rotate(-135deg);
+    }
+    .burger-menu.active span:nth-child(3) {
+      transform: scale(0);
+    }
+    .burger-menu.white span {
+      background-color: #ffffff;
+    }
   }
   .inputAndResult {
     position: absolute;
+
     opacity: 0;
     visibility: hidden;
     top: 0;
     width: 0;
-    right: 0;
+    right: 50%;
     transition: all 0.3s ease;
     max-width: none;
     margin: 0;
@@ -387,7 +458,7 @@ header {
     .inputContainer {
       input {
         padding: 0.5rem 0.75rem;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
       }
     }
     .results {
@@ -444,6 +515,74 @@ header {
             fill: white;
             width: 1.5rem;
             aspect-ratio: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  z-index: 995;
+  display: flex;
+  padding: 1rem;
+  padding-top: 5rem;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  &.active {
+    right: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+  .side-menu-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    padding: 1rem;
+    .side-menu-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .side-menu-header {
+        h2 {
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+      }
+      .side-menu-body ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        list-style: none;
+
+        li a {
+          width: 100%;
+          border: 2px solid #424dae;
+          padding: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          &:hover {
+            background-color: #424dae;
+            span {
+              color: #fff;
+            }
+          }
+          span {
+            color: #424dae;
           }
         }
       }
@@ -508,7 +647,7 @@ header {
     background-color: hsla(225, 25%, 50%, 0.75);
   }
   50% {
-    background-color: hsla(225, 25%, 30%, 0.25);
+    background-color: hsla(225, 20%, 48%, 0.25);
   }
   100% {
     background-color: hsla(225, 25%, 50%, 0.75);
