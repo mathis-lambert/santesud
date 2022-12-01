@@ -77,12 +77,11 @@ if (!checkCookie("favoris")) {
 
 // add or remove city from favorites
 if (cookie_star) {
-  const list_of_favorite = JSON.parse(getCookie("favoris"));
   let cityInformationsGet = new URLSearchParams(window.location.search);
   let cityInformations =
     cityInformationsGet.get("insee") + "-" + cityInformationsGet.get("ville");
 
-  if (checkCity(list_of_favorite, cityInformations)) {
+  if (checkCity(JSON.parse(getCookie("favoris")), cityInformations)) {
     cookie_star.classList.add("active");
   } else {
     cookie_star.classList.remove("active");
@@ -90,6 +89,7 @@ if (cookie_star) {
 
   cookie_star.addEventListener("click", () => {
     console.log("click");
+    let list_of_favorite = JSON.parse(getCookie("favoris"));
     if (!checkCity(list_of_favorite, cityInformations)) {
       list_of_favorite.push(cityInformations);
       document.cookie = "favoris =; expires = Thu, 01 Jan 1970 00:00:00 GMT";

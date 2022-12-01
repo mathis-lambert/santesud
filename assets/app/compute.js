@@ -64,6 +64,11 @@ function load_error(parent) {
   c.innerHTML += "Erreur de chargement";
 }
 
+document.querySelector(".search_icon").addEventListener("click", () => {
+  document.getElementById("chooseCity").focus();
+  document.querySelector(".inputAndResult").classList.toggle("active");
+});
+
 if (city && insee) {
   document.querySelector("#active_city").innerHTML = city;
 
@@ -182,11 +187,16 @@ async function weatherInformations(x, y) {
     }
   );
 
-  const data = await response.json();
-  const data2 = await response2.json();
-  c(data);
-  call_weather(data);
-  call_forecast(data2);
+  try {
+    const data = await response.json();
+    const data2 = await response2.json();
+
+    c(data);
+    call_weather(data);
+    call_forecast(data2);
+  } catch (error) {
+    load_error(".forecast_container");
+  }
 }
 
 //display weather informations
