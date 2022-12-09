@@ -179,15 +179,14 @@ body {
 
 .modal {
   position: fixed;
-  top: 150%;
+  bottom: -100%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgb(237, 237, 237);
+  transform: translateX(-50%);
+  background-color: rgb(7, 7, 7);
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
-  width: 100%;
-  max-width: 500px;
-  min-height: 300px;
+  width: min(100%, 1400px);
+  min-height: 90vh;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -201,7 +200,7 @@ body {
   border-radius: 1rem;
 }
 .modal.modal-open {
-  top: 50%;
+  bottom: 0;
 }
 .modal .modal-content {
   width: 100%;
@@ -218,16 +217,17 @@ body {
   transition: all 0.3s ease;
 }
 .modal .modal-content .close:hover {
-  color: #000000;
+  color: #ffffff;
 }
 .modal .modal-content h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #fff;
 }
 .modal .modal-content p {
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: #000000;
+  color: #ffffff;
 }
 
 .loading-div {
@@ -745,6 +745,38 @@ a {
   transition: 0.3s;
 }
 
+.card {
+  border-radius: 1.5rem;
+  background-color: hsla(225deg, 25%, 50%, 0.25);
+  box-shadow: inset 0 0 0 0.25px rgb(171, 171, 171);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.weather_icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weather_icon img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.square_info {
+  flex: 1 1 20%;
+  aspect-ratio: 1;
+  max-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .embed {
   width: 100%;
 }
@@ -756,23 +788,12 @@ a {
   height: -moz-fit-content;
   height: fit-content;
   padding: 1rem;
-  border-radius: 1.5rem;
-  background-color: hsla(225deg, 25%, 50%, 0.25);
-  box-shadow: inset 0 0 0 0.25px rgb(171, 171, 171);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
 }
 
 .particles_container,
 .iqa_container {
   flex: 0 1 auto;
   aspect-ratio: 1/1;
-  border-radius: 1.5rem;
-  background-color: hsla(225deg, 25%, 50%, 0.25);
-  box-shadow: 0 0 0 0.25px rgb(171, 171, 171);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  overflow: hidden;
 }
 
 .ovl {

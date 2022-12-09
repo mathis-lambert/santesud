@@ -158,14 +158,58 @@
     <!-- CONTAINER -->
     <div class="page_container">
       <div class="container">
-        <div class="head_container d-flex column justify-center align-center">
-          <div class="weather_container d-flex justify-center align-center">
-            <h1 id="temp"></h1>
-          </div>
-        </div>
-        <!-- cards -->
         <div class="data_container d-flex align-center full-width">
-          <div class="skeleton reco_card atmosud">
+          <!-- cards -->
+          <div class="card skeleton square_info atmosud">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+            <div class="col">
+              <h1 id="temp"></h1>
+              <div class="temp_forecast"></div>
+            </div>
+          </div>
+          <div class="card skeleton square_info atmosud">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+            <div class="weather_icon"></div>
+          </div>
+          <div class="card skeleton square_info atmosud">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+          </div>
+          <div class="card skeleton square_info atmosud">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+          </div>
+          <div class="card skeleton reco_card atmosud">
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -178,7 +222,7 @@
             <p id="todayReco"></p>
           </div>
 
-          <div class="skeleton iqa_container atmosud">
+          <div class="card skeleton iqa_container atmosud">
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -197,7 +241,7 @@
 
           <div
             data-target="#particles_modal"
-            class="skeleton particles_container d-flex align-center justify-center column atmosud"
+            class="card skeleton particles_container d-flex align-center justify-center column atmosud"
           >
             <div class="loading-div">
               <div class="ball"></div>
@@ -216,7 +260,7 @@
             <div class="ovl" data-target="#particles_modal"></div>
           </div>
 
-          <div class="embed skeleton embed_map">
+          <div class="card embed skeleton embed_map">
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -227,7 +271,7 @@
               <div class="ball"></div>
             </div>
           </div>
-          <div class="embed skeleton forecast_container meteomatics">
+          <div class="card embed skeleton forecast_container meteomatics">
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -239,7 +283,7 @@
             </div>
             <canvas id="temp_graph"></canvas>
           </div>
-          <div class="embed skeleton graph_load">
+          <div class="card embed skeleton graph_load">
             <canvas id="iqa_graph"></canvas>
             <div class="loading-div">
               <div class="ball"></div>

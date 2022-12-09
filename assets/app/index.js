@@ -35,7 +35,15 @@ const favCitiesList = document.getElementById("favCitiesList"),
 
 // fonction globale pour ajouter un cookie
 const addCookie = (name, content) => {
-  document.cookie = name + "=" + content + ";" + "path=/";
+  let date = new Date(2147483647000).toUTCString();
+  document.cookie =
+    name +
+    "=" +
+    content +
+    ";" +
+    "path=/; expires=" +
+    date +
+    ";max-age=31536000000";
 };
 
 // fonction globale pour checker si un cookie existe (renvoie true ou false)

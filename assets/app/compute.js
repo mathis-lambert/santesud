@@ -1,9 +1,11 @@
 const c = console.log.bind(console);
-Chart.defaults.color = "#fff";
+
 // get page parameters with let
 let params = new URLSearchParams(window.location.search);
 let insee = params.get("insee");
 let city = params.get("ville");
+
+document.title = "Infos pour " + city + " | SANTESUD";
 
 // get current date and convert it to the format : yyyy-mm-dd
 let actualDate = new Date().toISOString().split("T")[0];
@@ -76,7 +78,7 @@ if (city && insee) {
     hide_loader(".embed_map");
 
     document.querySelector(".embed_map").innerHTML += `
-    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_ih0KhLOgejFwZ85rzYf6W9VdRo6OtCk&q=${city}&zoom=10&maptype=satellite&language=fr" frameborder="0" style="border:0" allowfullscreen width="100%" height="100%"></iframe>
+    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_ih0KhLOgejFwZ85rzYf6W9VdRo6OtCk&q=${city}&zoom=10&maptype=roadmap&language=fr" frameborder="0" style="border:0" allowfullscreen width="100%" height="100%"></iframe>
     `;
   })();
 
@@ -206,8 +208,8 @@ function call_weather(data) {
 
   document.querySelector("#temp").innerHTML = `${temperature}°C`;
   document.querySelector(
-    ".weather_container"
-  ).innerHTML += `<img src="assets/icons/${weatherIconIndex}.png" alt="weather icon" id="weatherIcon" />`;
+    ".weather_icon"
+  ).innerHTML += `<img src="assets/icons/${weatherIconIndex}.svg" alt="weather icon" id="weatherIcon" />`;
 }
 
 //display forecast
@@ -228,45 +230,6 @@ function call_forecast(data) {
   });
 
   temperature_graph(forecast);
-}
-
-function temperature_graph(forecast) {
-  hide_loaders(".meteomatics");
-  const cfg = {
-    type: "line",
-    data: {
-      labels: forecast.map((e) => e.date),
-      datasets: [
-        {
-          label: "Température",
-          data: forecast.map((e) => e.temperature),
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          borderColor: "rgba(255, 99, 132, 1)",
-          tension: 0.3,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: `Prévisions des températures à ${new Date().getHours()}h sur 10 jours`,
-          font: {
-            size: 15,
-          },
-        },
-      },
-    },
-  };
-
-  new Chart(document.getElementById("temp_graph"), cfg);
 }
 
 // call historical datas of IQA through the past year and display it in a chart
@@ -350,55 +313,100 @@ fetchIQA_average()
     load_error(".graph_load");
   });
 
-function iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis) {
-  const cfg = {
-    type: "line",
-    data: {
-      labels: months,
-      datasets: [
-        {
-          label: "Marseille",
-          data: MarseilleAxis,
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          borderColor: "rgba(255, 99, 132, 1)",
-          tension: 0.3,
-        },
-        {
-          label: "Toulon",
-          data: ToulonAxis,
-          backgroundColor: "rgba(235, 235, 54, 0.2)",
-          borderColor: "rgba(235, 235, 54, 1)",
-          tension: 0.3,
-        },
-        {
-          label: city,
-          data: yAxis,
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          tension: 0.3,
-        },
-      ],
-    },
+if (Chart) {
+  Chart.defaults.color = "#fff";
 
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
+  function temperature_graph(forecast) {
+    hide_loaders(".meteomatics");
+    const cfg = {
+      type: "line",
+      data: {
+        labels: forecast.map((e) => e.date),
+        datasets: [
+          {
+            label: "Température",
+            data: forecast.map((e) => e.temperature),
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            tension: 0.3,
+          },
+        ],
       },
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: "Moyennes des IQA sur les 3 derniers mois",
-          font: {
-            size: 15,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: `Prévisions des températures à ${new Date().getHours()}h sur 10 jours`,
+            font: {
+              size: 15,
+            },
           },
         },
       },
-    },
-  };
+    };
 
-  new Chart(document.getElementById("iqa_graph"), cfg);
+    new Chart(document.getElementById("temp_graph"), cfg);
+  }
+
+  function iqa_month_graph(yAxis, MarseilleAxis, ToulonAxis) {
+    const cfg = {
+      type: "line",
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: "Marseille",
+            data: MarseilleAxis,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            tension: 0.3,
+          },
+          {
+            label: "Toulon",
+            data: ToulonAxis,
+            backgroundColor: "rgba(235, 235, 54, 0.2)",
+            borderColor: "rgba(235, 235, 54, 1)",
+            tension: 0.3,
+          },
+          {
+            label: city,
+            data: yAxis,
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            tension: 0.3,
+          },
+        ],
+      },
+
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: "Moyennes de la qualité de l'air les 12 derniers mois",
+            font: {
+              size: 15,
+            },
+          },
+        },
+      },
+    };
+
+    new Chart(document.getElementById("iqa_graph"), cfg);
+  }
+} else {
+  load_error(".graph_load");
 }

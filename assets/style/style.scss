@@ -182,14 +182,13 @@ body {
 
 .modal {
   position: fixed;
-  top: 150%;
+  bottom: -100%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(237, 237, 237, 1);
+  transform: translateX(-50%);
+  background-color: rgb(7, 7, 7);
   backdrop-filter: blur(4px);
-  width: 100%;
-  max-width: 500px;
-  min-height: 300px;
+  width: min(100%, 1400px);
+  min-height: 90vh;
   height: fit-content;
   padding: 1rem;
   visibility: hidden;
@@ -200,7 +199,7 @@ body {
   transition: all 0.3s ease;
   border-radius: 1rem;
   &.modal-open {
-    top: 50%;
+    bottom: 0;
   }
   .modal-content {
     width: 100%;
@@ -215,17 +214,18 @@ body {
       color: #424dae;
       transition: all 0.3s ease;
       &:hover {
-        color: #000000;
+        color: #ffffff;
       }
     }
     h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: #fff;
     }
     p {
       font-size: 1rem;
       margin-bottom: 1rem;
-      color: #000000;
+      color: #ffffff;
     }
   }
 }
@@ -723,6 +723,36 @@ a {
   }
 }
 
+.card {
+  border-radius: 1.5rem;
+  background-color: hsla(225, 25%, 50%, 0.25);
+  box-shadow: inset 0 0 0 0.25px rgb(171, 171, 171);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.weather_icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.square_info {
+  flex: 1 1 20%;
+  aspect-ratio: 1;
+  max-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .embed {
   width: 100%;
 }
@@ -730,24 +760,14 @@ a {
 .reco_card,
 .embed {
   flex: 1 1 50%;
-
   height: fit-content;
   padding: 1rem;
-  border-radius: 1.5rem;
-  background-color: hsla(225, 25%, 50%, 0.25);
-  box-shadow: inset 0 0 0 0.25px rgb(171, 171, 171);
-  backdrop-filter: blur(10px);
 }
 
 .particles_container,
 .iqa_container {
   flex: 0 1 auto;
   aspect-ratio: 1/1;
-  border-radius: 1.5rem;
-  background-color: hsla(225, 25%, 50%, 0.25);
-  box-shadow: 0 0 0 0.25px rgb(171, 171, 171);
-  backdrop-filter: blur(10px);
-  overflow: hidden;
 }
 .ovl {
   position: absolute !important;
