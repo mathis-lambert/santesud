@@ -209,7 +209,7 @@ function call_weather(data) {
   document.querySelector("#temp").innerHTML = `${temperature}°C`;
   document.querySelector(
     ".weather_icon"
-  ).innerHTML += `<img src="assets/icons/${weatherIconIndex}.svg" alt="weather icon" id="weatherIcon" />`;
+  ).innerHTML += `<object data="./assets/icons/${weatherIconIndex}.svg" type="image/svg+xml">svg link</object>`;
 }
 
 //display forecast
