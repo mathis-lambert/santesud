@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="./assets/style/style.css" />
   </head>
+
   <body>
     <div class="gradient-bg"></div>
     <script src="./assets/app/dayLight.js"></script>
@@ -67,17 +68,23 @@
             déterminer la qualité de l'air en fonction de la concentration des
             polluants dans l'air.
             <br />
-            Il est calculé à partir des concentrations mesurées de particules
-            fines (PM10 et PM2.5), de dioxyde de soufre (SO2), d'oxyde d'azote
-            (NO2) et d'ozone (O3).
+            Il est calculé à partir des concentrations mesurées de :
+          </p>
+          <ul>
+            <li>particules fines (PM10 et PM2.5),</li>
+            <li>dioxyde de soufre (SO2),</li>
+            <li>oxyde d'azote (NO2)</li>
+            <li>ozone (O3).</li>
+          </ul>
+          <p>
             <br />
             L'IQA est calculé à partir de la formule suivante :
             <br />
-            <code>
-              IQA = 100 - 100 * (PM10 + PM2.5 + SO2 + NO2 + O3) / (PM10 + PM2.5
-              + SO2 + NO2 + O3)max
-            </code>
-            <br />
+          </p>
+
+          <pre><code>IQA = 100 - 100 * (PM10 + PM2.5 + SO2 + NO2 + O3) / (PM10 + PM2.5 + SO2 + NO2 + O3)max</code></pre>
+          <br />
+          <p>
             où PM10, PM2.5, SO2, NO2 et O3 sont les concentrations mesurées des
             polluants en µg/m3 et PM10 + PM2.5 + SO2 + NO2 + O3)max est la
             concentration maximale des polluants en µg/m3.
@@ -160,7 +167,7 @@
       <div class="container">
         <div class="data_container d-flex align-center full-width">
           <!-- cards -->
-          <div class="card skeleton square_info atmosud">
+          <div class="card skeleton square_info">
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -171,11 +178,11 @@
               <div class="ball"></div>
             </div>
             <div class="col">
-              <h1 id="temp"></h1>
+              <h1 id="temp"><span id="temp_value">-</span>°c</h1>
               <div class="temp_forecast"></div>
             </div>
           </div>
-          <div class="card skeleton square_info atmosud">
+          <div class="card skeleton square_info">
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -186,28 +193,6 @@
               <div class="ball"></div>
             </div>
             <div class="weather_icon"></div>
-          </div>
-          <div class="card skeleton square_info atmosud">
-            <div class="loading-div">
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-            </div>
-          </div>
-          <div class="card skeleton square_info atmosud">
-            <div class="loading-div">
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-            </div>
           </div>
           <div class="card skeleton reco_card atmosud">
             <div class="loading-div">
