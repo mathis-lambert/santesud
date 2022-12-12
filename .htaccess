@@ -2,15 +2,15 @@ RewriteEngine On
 #RewriteBase /
 
 # Protect the htaccess file
-<Files .htaccess>
-Require all denied
-</Files>
+#<Files .htaccess>
+#Require all denied
+#</Files>
 
 # Protect googleToken
-<Files ./googleToken.php>
-Require local
-Require ip 179.61.246.134
-</Files>
+#<Files ./googleToken.php>
+#Require local
+#Require ip 179.61.246.134
+#</Files>
 
 # Disable directory browsing
-Options All -Indexes
+#Options All -Indexes
