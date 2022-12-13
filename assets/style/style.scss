@@ -200,8 +200,8 @@ code {
   background-color: rgb(7, 7, 7);
   backdrop-filter: blur(4px);
   width: min(100%, 1400px);
-  min-height: 90vh;
-  height: fit-content;
+  height: 85vh;
+  height: 85dvh;
   padding: 1rem;
   visibility: hidden;
   opacity: 0;
@@ -229,6 +229,10 @@ code {
     width: 100%;
     height: 100%;
     position: relative;
+    .modal-body {
+      height: 100%;
+      overflow-y: auto;
+    }
     .close {
       position: absolute;
       top: 0;

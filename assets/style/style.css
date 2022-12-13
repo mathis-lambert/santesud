@@ -198,10 +198,8 @@ code {
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
   width: min(100%, 1400px);
-  min-height: 90vh;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 85vh;
+  height: 85dvh;
   padding: 1rem;
   visibility: hidden;
   opacity: 0;
@@ -227,6 +225,10 @@ code {
   width: 100%;
   height: 100%;
   position: relative;
+}
+.modal .modal-content .modal-body {
+  height: 100%;
+  overflow-y: auto;
 }
 .modal .modal-content .close {
   position: absolute;
