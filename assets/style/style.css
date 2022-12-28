@@ -76,12 +76,12 @@ code {
   z-index: 1;
 }
 .inputAndResult .inputContainer input {
-  border: solid 3px #424dae;
+  border: solid 3px #0084ff;
   border-radius: 50px;
   width: 100%;
   padding: 0.5rem 1.5rem;
   font-size: clamp(1.2rem, 3vw, 1.75rem);
-  color: #424dae;
+  color: #0084ff;
 }
 .inputAndResult .inputContainer input:focus {
   outline: none;
@@ -99,7 +99,7 @@ code {
 .inputAndResult .results {
   position: absolute;
   background-color: white;
-  border: solid 3px #424dae;
+  border: solid 3px #0084ff;
   width: 100%;
   top: 50%;
   z-index: 0;
@@ -142,8 +142,8 @@ code {
   content: none;
 }
 .inputAndResult .results ul button {
-  background-color: #424dae;
-  border: solid 2px #424dae;
+  background-color: #0084ff;
+  border: solid 2px #0084ff;
   color: #fff;
   border-radius: 50px;
   padding: 0.5rem;
@@ -156,10 +156,10 @@ code {
 }
 .inputAndResult .results ul button:hover {
   background-color: #ffffff;
-  color: #424dae;
+  color: #0084ff;
 }
 .inputAndResult .results ul button:hover svg {
-  fill: #424dae;
+  fill: #0084ff;
 }
 .inputAndResult .results ul button svg {
   fill: white;
@@ -229,6 +229,7 @@ code {
 .modal .modal-content .modal-body {
   height: 100%;
   overflow-y: auto;
+  padding-bottom: 10vh;
 }
 .modal .modal-content .close {
   position: absolute;
@@ -236,7 +237,7 @@ code {
   right: 0;
   cursor: pointer;
   font-size: 2rem;
-  color: #424dae;
+  color: #0084ff;
   transition: all 0.3s ease;
 }
 .modal .modal-content .close:hover {
@@ -419,6 +420,11 @@ header .header_container {
 }
 header .header_container #active_city {
   color: #000000;
+  font-size: clamp(1.75rem, 2vw, 2rem);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: clamp(10rem, 30vw, 30rem);
 }
 header .header_container .search_container {
   position: absolute;
@@ -427,8 +433,8 @@ header .header_container .search_container {
 header .header_container .search_container .search_icon {
   position: relative;
   cursor: pointer;
-  background-color: #424dae;
-  border: #424dae 2px solid;
+  background-color: #0084ff;
+  border: #0084ff 2px solid;
   border-radius: 50%;
   padding: 0.5rem;
   aspect-ratio: 1;
@@ -448,7 +454,7 @@ header .header_container .search_container .search_icon:hover {
   background-color: white;
 }
 header .header_container .search_container .search_icon:hover svg {
-  fill: #424dae;
+  fill: #0084ff;
 }
 header .header_container .burger-menu {
   position: absolute;
@@ -468,7 +474,7 @@ header .header_container .burger-menu span {
   width: 100%;
   height: 4px;
   border-radius: 15px;
-  background-color: #424dae;
+  background-color: #0084ff;
   transition: 0.5s ease;
 }
 header .header_container .burger-menu.active span:nth-child(1) {
@@ -504,12 +510,12 @@ header .inputAndResult.active {
 header .inputAndResult .inputContainer input {
   padding: 0.5rem 0.75rem;
   font-size: 1.25rem;
-  border: 2px solid #424dae;
+  border: 2px solid #0084ff;
 }
 header .inputAndResult .results {
   position: absolute;
   background-color: white;
-  border: solid 2px #424dae;
+  border: solid 2px #0084ff;
   width: 100%;
   top: 50%;
   z-index: 0;
@@ -538,8 +544,8 @@ header .inputAndResult .results ul li:last-child {
   margin-bottom: 0.75rem;
 }
 header .inputAndResult .results ul button {
-  background-color: #424dae;
-  border: solid 2px #424dae;
+  background-color: #0084ff;
+  border: solid 2px #0084ff;
   color: #fff;
   border-radius: 50px;
   padding: 0.25rem;
@@ -552,10 +558,10 @@ header .inputAndResult .results ul button {
 }
 header .inputAndResult .results ul button:hover {
   background-color: #ffffff;
-  color: #424dae;
+  color: #0084ff;
 }
 header .inputAndResult .results ul button:hover svg {
-  fill: #424dae;
+  fill: #0084ff;
 }
 header .inputAndResult .results ul button svg {
   fill: white;
@@ -610,7 +616,7 @@ header .inputAndResult .results ul button svg {
 }
 .side-menu .side-menu-container .side-menu-content .side-menu-body ul li a {
   width: 100%;
-  border: 2px solid #424dae;
+  border: 2px solid #0084ff;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -619,13 +625,13 @@ header .inputAndResult .results ul button svg {
   transition: all 0.3s ease;
 }
 .side-menu .side-menu-container .side-menu-content .side-menu-body ul li a:hover {
-  background-color: #424dae;
+  background-color: #0084ff;
 }
 .side-menu .side-menu-container .side-menu-content .side-menu-body ul li a:hover span {
   color: #fff;
 }
 .side-menu .side-menu-container .side-menu-content .side-menu-body ul li a span {
-  color: #424dae;
+  color: #0084ff;
 }
 
 .page_container {
@@ -729,12 +735,12 @@ header .inputAndResult .results ul button svg {
 
 a {
   text-decoration: none;
-  color: #424dae;
+  color: #0084ff;
 }
 
 .btn {
-  background-color: #424dae;
-  border: solid 2px #424dae;
+  background-color: #0084ff;
+  border: solid 2px #0084ff;
   color: #fff;
   border-radius: 50px;
   padding: 0.5rem 1rem;
@@ -744,7 +750,7 @@ a {
 }
 .btn:hover {
   background-color: #ffffff;
-  color: #424dae;
+  color: #0084ff;
 }
 
 .data_container {

@@ -73,9 +73,9 @@ const updateMenu = () => {
     const list_of_favorite = JSON.parse(getCookie("favoris"));
     list_of_favorite.forEach((city) => {
       favCitiesList.innerHTML += `<li><a href="./view.html?insee=${
-        city.split("-")[0]
-      }&ville=${city.split("-")[1]}"><span>${
-        city.split("-")[1]
+        city.split("+")[0]
+      }&ville=${city.split("+")[1]}"><span>${
+        city.split("+")[1]
       }</span></a></li>`;
     });
   }
@@ -86,7 +86,7 @@ updateMenu();
 if (cookie_star) {
   let cityInformationsGet = new URLSearchParams(window.location.search);
   let cityInformations =
-    cityInformationsGet.get("insee") + "-" + cityInformationsGet.get("ville");
+    cityInformationsGet.get("insee") + "+" + cityInformationsGet.get("ville");
 
   if (checkCity(JSON.parse(getCookie("favoris")), cityInformations)) {
     cookie_star.classList.add("active");

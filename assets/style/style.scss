@@ -78,12 +78,12 @@ code {
     width: 100%;
     z-index: 1;
     input {
-      border: solid 3px #424dae;
+      border: solid 3px #0084ff;
       border-radius: 50px;
       width: 100%;
       padding: 0.5rem 1.5rem;
       font-size: clamp(1.2rem, 3vw, 1.75rem);
-      color: #424dae;
+      color: #0084ff;
       &:focus {
         outline: none;
       }
@@ -102,7 +102,7 @@ code {
   .results {
     position: absolute;
     background-color: white;
-    border: solid 3px #424dae;
+    border: solid 3px #0084ff;
     width: 100%;
     top: 50%;
     z-index: 0;
@@ -144,8 +144,8 @@ code {
         }
       }
       button {
-        background-color: #424dae;
-        border: solid 2px #424dae;
+        background-color: #0084ff;
+        border: solid 2px #0084ff;
         color: #fff;
         border-radius: 50px;
         padding: 0.5rem;
@@ -157,9 +157,9 @@ code {
         transition: all 0.3s ease;
         &:hover {
           background-color: #ffffff;
-          color: #424dae;
+          color: #0084ff;
           svg {
-            fill: #424dae;
+            fill: #0084ff;
           }
         }
         svg {
@@ -232,6 +232,7 @@ code {
     .modal-body {
       height: 100%;
       overflow-y: auto;
+      padding-bottom: 10vh;
     }
     .close {
       position: absolute;
@@ -239,7 +240,7 @@ code {
       right: 0;
       cursor: pointer;
       font-size: 2rem;
-      color: #424dae;
+      color: #0084ff;
       transition: all 0.3s ease;
       &:hover {
         color: #ffffff;
@@ -398,6 +399,11 @@ header {
     position: relative;
     #active_city {
       color: #000000;
+      font-size: clamp(1.75rem, 2vw, 2rem);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      max-width: clamp(10rem, 30vw, 30rem);
     }
     .search_container {
       position: absolute;
@@ -405,8 +411,8 @@ header {
       .search_icon {
         position: relative;
         cursor: pointer;
-        background-color: #424dae;
-        border: #424dae 2px solid;
+        background-color: #0084ff;
+        border: #0084ff 2px solid;
         border-radius: 50%;
         padding: 0.5rem;
         aspect-ratio: 1;
@@ -425,7 +431,7 @@ header {
         &:hover {
           background-color: white;
           svg {
-            fill: #424dae;
+            fill: #0084ff;
           }
         }
       }
@@ -449,7 +455,7 @@ header {
       width: 100%;
       height: 4px;
       border-radius: 15px;
-      background-color: #424dae;
+      background-color: #0084ff;
       transition: 0.5s ease;
     }
     .burger-menu.active span:nth-child(1) {
@@ -487,13 +493,13 @@ header {
       input {
         padding: 0.5rem 0.75rem;
         font-size: 1.25rem;
-        border: 2px solid #424dae;
+        border: 2px solid #0084ff;
       }
     }
     .results {
       position: absolute;
       background-color: white;
-      border: solid 2px #424dae;
+      border: solid 2px #0084ff;
       width: 100%;
       top: 50%;
       z-index: 0;
@@ -522,8 +528,8 @@ header {
           }
         }
         button {
-          background-color: #424dae;
-          border: solid 2px #424dae;
+          background-color: #0084ff;
+          border: solid 2px #0084ff;
           color: #fff;
           border-radius: 50px;
           padding: 0.25rem;
@@ -535,9 +541,9 @@ header {
           transition: all 0.3s ease;
           &:hover {
             background-color: #ffffff;
-            color: #424dae;
+            color: #0084ff;
             svg {
-              fill: #424dae;
+              fill: #0084ff;
             }
           }
           svg {
@@ -597,7 +603,7 @@ header {
 
         li a {
           width: 100%;
-          border: 2px solid #424dae;
+          border: 2px solid #0084ff;
           padding: 1rem;
           display: flex;
           align-items: center;
@@ -605,13 +611,13 @@ header {
           cursor: pointer;
           transition: all 0.3s ease;
           &:hover {
-            background-color: #424dae;
+            background-color: #0084ff;
             span {
               color: #fff;
             }
           }
           span {
-            color: #424dae;
+            color: #0084ff;
           }
         }
       }
@@ -711,12 +717,12 @@ header {
 }
 a {
   text-decoration: none;
-  color: #424dae;
+  color: #0084ff;
 }
 
 .btn {
-  background-color: #424dae;
-  border: solid 2px #424dae;
+  background-color: #0084ff;
+  border: solid 2px #0084ff;
   color: #fff;
   border-radius: 50px;
   padding: 0.5rem 1rem;
@@ -725,7 +731,7 @@ a {
   transition: all 0.3s ease;
   &:hover {
     background-color: #ffffff;
-    color: #424dae;
+    color: #0084ff;
   }
 }
 
