@@ -41,6 +41,10 @@ code {
   white-space: pre-wrap;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .gradient-bg {
   position: fixed;
   inset: 0;
@@ -256,6 +260,72 @@ code {
       margin-bottom: 1rem;
       color: #ffffff;
     }
+  }
+}
+
+.modal_flag {
+  position: fixed;
+  top: 5rem;
+  right: 0;
+  transform: translateX(100%);
+  max-width: min(100% - 3rem, 400px);
+  background-color: rgba(85, 85, 85, 0.472);
+  border: solid 2px #0084ff;
+  border-right: none;
+  backdrop-filter: blur(4px);
+  height: fit-content;
+  padding: 1rem;
+  visibility: hidden;
+  opacity: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999;
+  transition: all 0.3s ease;
+  border-radius: 1rem 0 0 1rem;
+  color: rgb(255, 255, 255);
+
+  .more-infos {
+    height: 1.75rem;
+    padding: 0.4rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #40404050;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    aspect-ratio: 1;
+    height: 2rem;
+    padding: 0.4rem;
+    color: #0084ff;
+    transition: all 0.3s ease;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    &:hover {
+      filter: brightness(0.75);
+    }
+  }
+
+  &.opened {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -758,11 +828,32 @@ a {
 }
 
 .card {
+  position: relative;
   border-radius: 1.5rem;
   background-color: hsla(225, 25%, 50%, 0.25);
   box-shadow: inset 0 0 0 0.25px rgb(171, 171, 171);
   backdrop-filter: blur(10px);
   overflow: hidden;
+}
+
+.allowed-click {
+  position: absolute;
+  aspect-ratio: 1;
+  height: 1.75rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  background-color: #3d3d3d5b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 .weather_icon {
@@ -796,9 +887,14 @@ a {
   width: 100%;
 }
 
-.reco_card,
-.embed {
+.reco_card {
   flex: 1 1 50%;
+  max-height: fit-content;
+  padding: 1rem;
+}
+
+.embed {
+  flex: 1 0 100%;
   height: fit-content;
   padding: 1rem;
 }
@@ -871,6 +967,19 @@ p {
   padding: 0.5rem !important;
   iframe {
     border-radius: 1rem;
+  }
+}
+
+.alerts_container {
+  &-content {
+    height: 100%;
+    gap: 2rem;
+    color: white;
+
+    .alerts_probability {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
   }
 }
 

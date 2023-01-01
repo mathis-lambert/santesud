@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accueil | SANTESUD</title>
 
+    <meta
+      name="description"
+      content="
+      SANTESUD est une application web qui permet de connaître la qualité de l'air et d'autres informations météorologique 
+      dans une ville donnée.
+      "
+    />
+
     <link rel="manifest" href="site.webmanifest" />
 
     <!-- import css -->
@@ -104,12 +112,17 @@
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
-              document.getElementById("current_city").innerHTML =
-                data.features[0].properties.city;
+              if (data.features.length > 0) {
+                document.getElementById("current_city").innerHTML =
+                  data.features[0].properties.city;
 
-              document.getElementById(
-                "current_city_link"
-              ).innerHTML = `<a href="./view.html?insee=${data.features[0].properties.citycode}&ville=${data.features[0].properties.city}" class="btn">Voir</a>`;
+                document.getElementById(
+                  "current_city_link"
+                ).innerHTML = `<a href="./view.html?insee=${data.features[0].properties.citycode}&ville=${data.features[0].properties.city}" class="btn">Voir</a>`;
+              } else {
+                document.getElementById("current_city").innerHTML =
+                  "Aucune ville trouvée";
+              }
             });
 
           // if user didn't allow geolocation

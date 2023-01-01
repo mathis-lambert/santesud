@@ -161,27 +161,39 @@ if (city && insee) {
             `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=${insee}&srid=2154&echeances=0&date_diff_min=${
               new Date().getFullYear() - 1
             }-${
-              new Date().getMonth() + 1
+              new Date().getMonth() + 1 > 9
+                ? new Date().getMonth() + 1
+                : "0" + (new Date().getMonth() + 1)
             }-01&date_diff_max=${new Date().getFullYear()}-${
-              new Date().getMonth() + 1
+              new Date().getMonth() + 1 > 9
+                ? new Date().getMonth() + 1
+                : "0" + (new Date().getMonth() + 1)
             }-01`
           );
           const marseille = await fetch(
             `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=13055&srid=2154&echeances=0&date_diff_min=${
               new Date().getFullYear() - 1
             }-${
-              new Date().getMonth() + 1
+              new Date().getMonth() + 1 > 9
+                ? new Date().getMonth() + 1
+                : "0" + (new Date().getMonth() + 1)
             }-01&date_diff_max=${new Date().getFullYear()}-${
-              new Date().getMonth() + 1
+              new Date().getMonth() + 1 > 9
+                ? new Date().getMonth() + 1
+                : "0" + (new Date().getMonth() + 1)
             }-01`
           );
           const toulon = await fetch(
             `https://api.atmosud.org/iqa2021/commune/bulletin/journalier?format_indice=valeur&indice=iqa&format=json&insee=83137&srid=2154&echeances=0&date_diff_min=${
               new Date().getFullYear() - 1
             }-${
-              new Date().getMonth() + 1
+              new Date().getMonth() + 1 > 9
+                ? new Date().getMonth() + 1
+                : "0" + (new Date().getMonth() + 1)
             }-01&date_diff_max=${new Date().getFullYear()}-${
-              new Date().getMonth() + 1
+              new Date().getMonth() + 1 > 9
+                ? new Date().getMonth() + 1
+                : "0" + (new Date().getMonth() + 1)
             }-01`
           );
 
@@ -286,6 +298,56 @@ if (city && insee) {
         };
 
         new Chart(document.getElementById("iqa_graph"), cfg);
+      }
+
+      function fetchAlerts() {
+        (async () => {
+          try {
+            const response = await fetch(
+              "https://api.atmosud.org/episodes/pref/liste"
+            );
+            const data = await response.json();
+            processAlerts(data);
+          } catch (error) {
+            load_error(".alert_container");
+          }
+        })();
+      }
+
+      fetchAlerts();
+
+      function processAlerts(data) {
+        const YEAR_DEBUT = 2014;
+        const PAST_YEARS = new Date().getFullYear() - YEAR_DEBUT;
+
+        const pastAlertsPerDays = data.filter((alert) => {
+          return alert.date_diffusion.match(
+            new RegExp(
+              `^[0-9]{4}-${
+                new Date().getMonth() + 1 < 10
+                  ? "0" + (new Date().getMonth() + 1)
+                  : new Date().getMonth() + 1
+              }-${
+                new Date().getDate() < 10
+                  ? "0" + new Date().getDate()
+                  : new Date().getDate()
+              }$`
+            )
+          );
+        });
+
+        const numberOfAlerts = pastAlertsPerDays.length;
+
+        let probability = Math.round((numberOfAlerts / PAST_YEARS) * 100);
+
+        const alerts_probability = document.querySelector(
+          ".alerts_probability"
+        );
+
+        hide_loader(".alerts_container");
+        alerts_probability.innerHTML = probability + "%";
+
+        console.log(probability);
       }
     } else {
       load_error(".graph_load");

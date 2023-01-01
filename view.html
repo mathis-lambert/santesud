@@ -10,6 +10,14 @@
     <title>Voir info</title>
     <link rel="manifest" href="site.webmanifest" />
 
+    <meta
+      name="description"
+      content="
+      SANTESUD est une application web qui permet de connaître la qualité de l'air et d'autres informations météorologique 
+      dans une ville donnée.
+      "
+    />
+
     <link rel="stylesheet" href="./assets/style/style.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -92,6 +100,20 @@
             concentration maximale des polluants en µg/m3.
           </p>
         </div>
+      </div>
+    </div>
+
+    <div class="modal_flag">
+      <div class="modal_content">
+        Vous pouvez cliquer sur les éléments qui possèdent l'icone
+        <div class="more-infos">
+          <img src="./assets/icons/more-infos.svg" alt="" />
+        </div>
+        pour obtenir plus d'informations.
+      </div>
+
+      <div class="close">
+        <img src="./assets/icons/close.svg" alt="" />
       </div>
     </div>
 
@@ -210,6 +232,9 @@
           </div>
 
           <div class="card skeleton iqa_container atmosud">
+            <div class="allowed-click">
+              <img src="./assets/icons/more-infos.svg" alt="" />
+            </div>
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -230,6 +255,9 @@
             data-target="#particles_modal"
             class="card skeleton particles_container d-flex align-center justify-center column atmosud"
           >
+            <div class="allowed-click">
+              <img src="./assets/icons/more-infos.svg" alt="" />
+            </div>
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>
@@ -272,6 +300,23 @@
           </div>
           <div class="card embed skeleton graph_load">
             <canvas id="iqa_graph"></canvas>
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+          </div>
+          <div class="card skeleton square_info alerts_container">
+            <div
+              class="alerts_container-content d-flex column justify-center align-center"
+            >
+              <h2 class="text-center">Probabilité d'alerte préfectorale</h2>
+              <div class="alerts_probability"></div>
+            </div>
             <div class="loading-div">
               <div class="ball"></div>
               <div class="ball"></div>

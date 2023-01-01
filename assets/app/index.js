@@ -62,6 +62,18 @@ const removeCity = (arr, e) => arr.filter((el) => el !== e);
 // tester si ville existe dans le cookie
 const checkCity = (arr, e) => arr.includes(e);
 
+const modal_flag = document.querySelector(".modal_flag");
+if (modal_flag) {
+  modal_flag.querySelector(".close").addEventListener("click", () => {
+    modal_flag.classList.remove("opened");
+  });
+
+  if (!checkCookie("isNewVisitor")) {
+    addCookie("isNewVisitor", "false");
+    modal_flag.classList.add("opened");
+  }
+}
+
 if (!checkCookie("favoris")) {
   addCookie("favoris", "[]");
 }
