@@ -831,7 +831,7 @@ a {
   position: relative;
   border-radius: 1.5rem;
   background-color: hsla(225, 25%, 50%, 0.25);
-  box-shadow: inset 0 0 0 0.25px rgb(171, 171, 171);
+  box-shadow: 0 0 0 0.5px rgba(171, 171, 171, 0.46) inset;
   backdrop-filter: blur(10px);
   overflow: hidden;
 }
@@ -843,25 +843,23 @@ a {
   top: 0.5rem;
   right: 0.5rem;
   border-radius: 50%;
-  padding: 0.5rem;
   background-color: #3d3d3d5b;
   display: flex;
   justify-content: center;
   align-items: center;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: 50%;
     object-fit: contain;
   }
 }
 
 .weather_icon {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  object-fit: contain;
   & object {
     max-height: 100%;
     width: 100%;
@@ -887,10 +885,17 @@ a {
   width: 100%;
 }
 
+.embed_map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .reco_card {
   flex: 1 1 50%;
   max-height: fit-content;
   padding: 1rem;
+  min-height: 200px;
 }
 
 .embed {

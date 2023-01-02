@@ -1,10 +1,22 @@
 {
   "name": "SANTÉ SUD",
   "short_name": "santesud",
-  "theme_color": "rgba(0,0,0,0)",
-  "background_color": "#2e437e",
+  "theme_color": "#0084ff",
+  "background_color": "#0084ff",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
-  "start_url": "/"
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/assets/img/icon1000.png",
+      "sizes": "1000x1000",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icon180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
 }
