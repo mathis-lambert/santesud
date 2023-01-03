@@ -107,9 +107,11 @@
           <pre><code>IQA = 100 - 100 * (PM10 + PM2.5 + SO2 + NO2 + O3) / (PM10 + PM2.5 + SO2 + NO2 + O3)max</code></pre>
           <br />
           <p>
-            où PM10, PM2.5, SO2, NO2 et O3 sont les concentrations mesurées des
-            polluants en µg/m3 et PM10 + PM2.5 + SO2 + NO2 + O3)max est la
-            concentration maximale des polluants en µg/m3.
+            L'indice d'aujourd'hui est :
+            <span id="iqa_modal_value"></span>
+
+            <br /><br />
+            <span id="more_about_iqa"></span>
           </p>
         </div>
       </div>
@@ -203,6 +205,7 @@
       <div class="container">
         <div class="data_container d-flex align-center full-width">
           <!-- cards -->
+          <div class="alerts-today card hidden"></div>
           <div class="card skeleton square_info">
             <div class="loading-div">
               <div class="ball"></div>
@@ -214,7 +217,7 @@
               <div class="ball"></div>
             </div>
             <div class="col">
-              <h1 id="temp"><span id="temp_value">-</span>°c</h1>
+              <h1 id="temp"><span id="temp_value">-</span>°</h1>
               <div class="temp_forecast"></div>
             </div>
           </div>
@@ -285,6 +288,19 @@
             <h3 class="particles" id="p3"></h3>
             <h3 class="particles" id="p4"></h3>
             <div class="ovl" data-target="#particles_modal"></div>
+          </div>
+
+          <div class="card full_reco_card atmosud skeleton">
+            <ul class="reco_container"></ul>
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
           </div>
 
           <div class="card embed skeleton embed_map">

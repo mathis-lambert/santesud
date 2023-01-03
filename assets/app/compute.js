@@ -109,6 +109,7 @@ if (city && insee) {
             `https://api.atmosud.org/siam/v1/communes/${insee}`
           );
           const data = await response.json();
+          console.log(data);
           display_infos(data.data);
         } catch (error) {
           load_error(".atmosud");
@@ -122,7 +123,7 @@ if (city && insee) {
 
         let todayIndicesAtmos = data.indices_atmo[actualDate];
 
-        let todayIQA = Math.round(todayIndicesAtmos.indice_atmo);
+        let todayIQA = Math.floor(todayIndicesAtmos.indice_atmo);
 
         let indicesAtmoLegends = data.legendes.indice_atmo[todayIQA];
         let pollutionLegends = data.legendes.polluants;
@@ -134,7 +135,26 @@ if (city && insee) {
 
         iqaValue.innerHTML = `${indicesAtmoLegends.qualificatif} : ${todayIQA}`;
 
+        let recommendationsArray = todayIndicesAtmos.recommandations;
+        // display recommendations
+        const fullRecommendations = document.querySelector(".reco_container");
+        fullRecommendations.innerHTML = "";
+        recommendationsArray.forEach((e) => {
+          fullRecommendations.innerHTML += `<li>
+          <img src="${e.picto_url}" alt="${e.titre}">
+          <h2>${e.titre}</h2>
+          <p>${e.description}</p>
+                                            </li>`;
+        });
+
         recommendations.innerHTML = data.commentaires[actualDate];
+
+        //display infos to iqa modal
+        const iqaModalValue = document.querySelector("#iqa_modal_value"),
+          iqaMoreInfos = document.querySelector("#more_about_iqa");
+
+        iqaModalValue.innerHTML = `${indicesAtmoLegends.qualificatif} : ${todayIQA}`;
+        iqaMoreInfos.innerHTML = todayIndicesAtmos.indice_stat;
 
         // informations of pollution particles
         let pollutionParticles = todayIndicesAtmos.sous_indices;
@@ -317,8 +337,58 @@ if (city && insee) {
       fetchAlerts();
 
       function processAlerts(data) {
+        console.log(data);
         const YEAR_DEBUT = 2014;
         const PAST_YEARS = new Date().getFullYear() - YEAR_DEBUT;
+
+        let todayAlerts =
+          data.filter((alert) => {
+            return alert.date_diffusion.match(
+              new RegExp(
+                `${new Date().getFullYear() - 1}-${
+                  new Date().getMonth() + 1 < 10
+                    ? "0" + (new Date().getMonth() + 1)
+                    : new Date().getMonth() + 1
+                }-${
+                  new Date().getDate() < 10
+                    ? "0" + new Date().getDate()
+                    : new Date().getDate()
+                }$`
+              )
+            );
+          }) || [];
+
+        console.log("todayAlerts", todayAlerts);
+
+        const alerts_today = document.querySelector(".alerts-today");
+
+        if (todayAlerts.length > 0) {
+          alerts_today.classList.remove("hidden");
+          alerts_today.innerHTML = `
+          <h3>Alertes aujourd'hui</h3>
+          <ul>
+            ${todayAlerts
+              .map((alert) => {
+                return `<li>
+                          <h2>${alert.titre}</h2>
+                          <p>${alert.zone_libelle}</p>
+                          <p>${alert.niveau_libelle}</p>
+                          <p>${alert.commentaire} 
+                          <br>
+                          Nom du polluant : ${alert.polluant_libelle}
+                          </p>
+                          <p>${alert.date_diffusion}</p>
+
+                        </li>`;
+              })
+              .join("")}
+          </ul>
+
+            
+          `;
+        }
+
+        console.log(todayAlerts);
 
         const pastAlertsPerDays = data.filter((alert) => {
           return alert.date_diffusion.match(

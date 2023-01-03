@@ -85,8 +85,8 @@ code {
       border: solid 3px #0084ff;
       border-radius: 50px;
       width: 100%;
-      padding: 0.5rem 1.5rem;
-      font-size: clamp(1.2rem, 3vw, 1.75rem);
+      padding: 0.5rem 1rem;
+      font-size: clamp(1rem, 3vw, 1.25rem);
       color: #0084ff;
       &:focus {
         outline: none;
@@ -96,8 +96,8 @@ code {
       position: absolute;
       top: -2rem;
       left: 0;
-      padding: 0.5rem 1.5rem;
-      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
       color: #fff;
       pointer-events: none;
       transition: all 0.3s ease;
@@ -126,7 +126,7 @@ code {
         justify-content: space-between;
 
         h2 {
-          font-size: clamp(1rem, 3vw, 1.4rem);
+          font-size: clamp(0.9rem, 3vw, 1.1rem);
           font-weight: 600;
         }
         &:first-child {
@@ -152,7 +152,7 @@ code {
         border: solid 2px #0084ff;
         color: #fff;
         border-radius: 50px;
-        padding: 0.5rem;
+        padding: 0.25rem;
         aspect-ratio: 1;
         display: flex;
         align-items: center;
@@ -168,7 +168,7 @@ code {
         }
         svg {
           fill: white;
-          width: 1.5rem;
+          width: 1.25rem;
           aspect-ratio: 1;
         }
       }
@@ -194,6 +194,82 @@ code {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.alerts-today {
+  flex: 0 0 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #fff;
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-content: space-between;
+      background-color: #683333;
+      padding: 1rem;
+      border-radius: 0.8rem;
+      h2 {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.full_reco_card {
+  flex: 0 0 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  min-height: 200px;
+}
+ul.reco_container {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+    background-color: #4343435b;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    max-height: 300px;
+    min-width: 250px;
+    h2 {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      font-weight: 600;
+    }
+    p {
+      font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+  }
 }
 
 .modal {
