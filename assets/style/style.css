@@ -1125,19 +1125,19 @@ footer p a:hover {
 }
 
 .day_video {
-  width: auto;
   padding: 0.5rem;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  aspect-ratio: unset;
   overflow: hidden;
-  aspect-ratio: 16/9;
 }
 .day_video video {
-  aspect-ratio: 16/9;
   border-radius: 1rem;
   width: 100%;
   max-height: 100%;
+  max-width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -1154,9 +1154,9 @@ footer p a:hover {
   bottom: -2rem;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 2rem);
+  width: calc(100% - 1.5rem);
   height: 2rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(120, 120, 120, 0.5);
   border-radius: 1rem;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
@@ -1174,16 +1174,22 @@ footer p a:hover {
   cursor: pointer;
 }
 .day_video:hover .menu_video {
-  bottom: 0.5rem;
+  bottom: 0.75rem;
 }
 
 @media screen and (min-width: 500px) {
   .day_video {
     height: 300px;
+    aspect-ratio: 16/9;
+    width: unset;
+  }
+  .day_video video {
+    width: unset;
+    height: 100%;
   }
 }
 @media screen and (max-width: 768px) {
   .day_video .menu_video {
-    bottom: 0.5rem;
+    bottom: 0.75rem;
   }
 }/*# sourceMappingURL=style.css.map */

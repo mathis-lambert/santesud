@@ -360,7 +360,6 @@
           <div class="card day_video">
             <video
               src="./assets/vids/suntime.mp4"
-              loop
               muted
               id="suntime_video"
             ></video>
@@ -386,13 +385,6 @@
 
                 let convertedHours = HoursMinutes.split(":")[0];
                 let convertedMinutes = HoursMinutes.split(":")[1];
-
-                convertedHours < 10
-                  ? (convertedHours = "0" + convertedHours)
-                  : "";
-                convertedMinutes < 10
-                  ? (convertedMinutes = "0" + convertedMinutes)
-                  : "";
 
                 HoursMinutes = convertedHours + "." + convertedMinutes;
 
