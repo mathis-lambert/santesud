@@ -1118,6 +1118,13 @@ footer {
   aspect-ratio: unset;
   overflow: hidden;
 
+  /* This one works! */
+
+  *::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+  }
+
   video {
     border-radius: 1rem;
     width: 100%;

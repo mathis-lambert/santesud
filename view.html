@@ -361,6 +361,7 @@
             <video
               src="./assets/vids/suntime.mp4"
               muted
+              autoplay
               id="suntime_video"
             ></video>
             <div class="currentTime"></div>
@@ -374,6 +375,8 @@
 
               // once the video is loaded, play it
               suntimeVid.onloadeddata = function () {
+                // pause the video
+                suntimeVid.pause();
                 /*
                  * set the time code for the video, time format hh.mm
                  * 00.00 = 00h00

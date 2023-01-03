@@ -1132,6 +1132,11 @@ footer p a:hover {
   align-items: center;
   aspect-ratio: unset;
   overflow: hidden;
+  /* This one works! */
+}
+.day_video *::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
 }
 .day_video video {
   border-radius: 1rem;
