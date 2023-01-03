@@ -77,6 +77,7 @@ function load_error(parent) {
   c.forEach((b) => {
     b.querySelectorAll(".loading-div .ball").forEach((e) => {
       e.style.backgroundColor = "red";
+      e.style.animation = "none";
     });
     b.classList.remove("skeleton");
   });
@@ -430,10 +431,15 @@ if (city && insee) {
           const response = await fetch(
             `https://api-adresse.data.gouv.fr/search/?q=${city}&limit=1`
           );
-          const data = await response.json();
-          city_coord.x = data.features[0].geometry.coordinates[0];
-          city_coord.y = data.features[0].geometry.coordinates[1];
-          weatherInformations(city_coord.x, city_coord.y);
+          if (response.status == 200) {
+            const data = await response.json();
+            city_coord.x = data.features[0].geometry.coordinates[0];
+            city_coord.y = data.features[0].geometry.coordinates[1];
+            weatherInformations(city_coord.x, city_coord.y);
+          } else {
+            load_error(".forecast_container");
+            load_error(".square_info");
+          }
         } catch (error) {
           load_error(".forecast_container");
         }
