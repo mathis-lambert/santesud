@@ -10,7 +10,7 @@
 /* Development variables */
 const FETCH_APIs = true;
 const FETCH_ATMOSUD = true;
-const FETCH_METEO = false;
+const FETCH_METEO = true;
 
 const c = console.log.bind(console);
 c("SANTESUD - Développé par Mathis Lambert et Matthieu Cohen");
@@ -478,6 +478,8 @@ if (city && insee) {
 
       //display weather informations
       function call_weather(data) {
+        console.log("call_weather", data);
+
         hide_loaders(".square_info");
         let weatherIconIndex = data.data[1].coordinates[0].dates[0].value;
         weather_id = weatherIconIndex;
@@ -489,6 +491,42 @@ if (city && insee) {
         document.querySelector(
           ".weather_icon"
         ).innerHTML += `<object data="./assets/icons/${weatherIconIndex}.svg" type="image/svg+xml">svg link</object>`;
+
+        let sunrise = data.data[4].coordinates[0].dates[0].value;
+        let sunset = data.data[5].coordinates[0].dates[0].value;
+
+        // formatage des heures de lever et coucher de soleil
+        let sunriseHour = new Date(sunrise).getHours();
+        let sunriseMinutes = new Date(sunrise).getMinutes();
+
+        let sunsetHour = new Date(sunset).getHours();
+        let sunsetMinutes = new Date(sunset).getMinutes();
+
+        sunrise = `${sunriseHour > 9 ? sunriseHour : "0" + sunriseHour}.${
+          sunriseMinutes > 9 ? sunriseMinutes : "0" + sunriseMinutes
+        }`;
+        sunset = `${sunsetHour > 9 ? sunsetHour : "0" + sunsetHour}.${
+          sunsetMinutes > 9 ? sunsetMinutes : "0" + sunsetMinutes
+        }`;
+
+        console.log("sunrise", sunrise, "sunset", sunset);
+
+        const suntimeVid = document.querySelector("#suntime_video");
+        const currentTime = document.querySelector(".currentTime");
+
+        // Gestion des boutons sunrise et sunset
+        const sunriseBtn = document.querySelector("#sunrise");
+        const sunsetBtn = document.querySelector("#sunset");
+
+        sunriseBtn.addEventListener("click", () => {
+          suntimeVid.currentTime = sunrise;
+          currentTime.innerHTML = sunrise.replace(".", "h");
+        });
+
+        sunsetBtn.addEventListener("click", () => {
+          suntimeVid.currentTime = sunset;
+          currentTime.innerHTML = sunset.replace(".", "h");
+        });
       }
 
       //display forecast

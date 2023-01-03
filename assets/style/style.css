@@ -1122,4 +1122,67 @@ footer p a {
 }
 footer p a:hover {
   color: rgb(157, 211, 255);
+}
+
+.day_video {
+  width: auto;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.day_video video {
+  aspect-ratio: 16/9;
+  border-radius: 1rem;
+  width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.day_video .currentTime {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.day_video .menu_video {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  transition: 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1.5rem;
+  gap: 0.5rem;
+}
+.day_video .menu_video button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.day_video:hover .menu_video {
+  bottom: 0.5rem;
+}
+
+@media screen and (min-width: 500px) {
+  .day_video {
+    height: 300px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .day_video .menu_video {
+    bottom: 0.5rem;
+  }
 }/*# sourceMappingURL=style.css.map */

@@ -356,6 +356,62 @@
               <div class="ball"></div>
             </div>
           </div>
+
+          <div class="card day_video">
+            <video
+              src="./assets/vids/suntime.mp4"
+              loop
+              muted
+              id="suntime_video"
+            ></video>
+            <div class="currentTime"></div>
+            <div class="menu_video">
+              <button id="actual_hour">Maintenant</button>
+              <button id="sunrise">Lever</button>
+              <button id="sunset">Coucher</button>
+            </div>
+            <script>
+              const suntimeVid = document.querySelector("#suntime_video");
+
+              // once the video is loaded, play it
+              suntimeVid.onloadeddata = function () {
+                /*
+                 * set the time code for the video, time format hh.mm
+                 * 00.00 = 00h00
+                 */
+                let HoursMinutes = new Date().toLocaleTimeString("fr-FR", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+
+                let convertedHours = HoursMinutes.split(":")[0];
+                let convertedMinutes = HoursMinutes.split(":")[1];
+
+                convertedHours < 10
+                  ? (convertedHours = "0" + convertedHours)
+                  : "";
+                convertedMinutes < 10
+                  ? (convertedMinutes = "0" + convertedMinutes)
+                  : "";
+
+                HoursMinutes = convertedHours + "." + convertedMinutes;
+
+                strHoursMinutes = convertedHours + "h" + convertedMinutes;
+                const currentTime = document.querySelector(".currentTime");
+                currentTime.innerHTML = strHoursMinutes;
+
+                // set the video time
+                suntimeVid.currentTime = HoursMinutes;
+
+                // set the video time to the current time
+                const actualHour = document.querySelector("#actual_hour");
+                actualHour.addEventListener("click", () => {
+                  suntimeVid.currentTime = HoursMinutes;
+                  currentTime.innerHTML = strHoursMinutes;
+                });
+              };
+            </script>
+          </div>
         </div>
       </div>
     </div>
