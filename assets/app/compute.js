@@ -45,8 +45,10 @@ const sortMonths = (months) => [
   ...Object.keys(months).slice(0, new Date().getMonth()),
 ];
 
+// sort months
 const months = sortMonths(object_months);
 
+// initialize city coordinates
 const city_coord = {
   x: 0,
   y: 0,
@@ -320,26 +322,23 @@ if (city && insee) {
         new Chart(document.getElementById("iqa_graph"), cfg);
       }
 
-      function fetchAlerts() {
-        (async () => {
-          try {
-            const response = await fetch(
-              "https://api.atmosud.org/episodes/pref/liste"
-            );
-            const data = await response.json();
-            processAlerts(data);
-          } catch (error) {
-            load_error(".alert_container");
-          }
-        })();
-      }
-
-      fetchAlerts();
+      (async () => {
+        try {
+          const response = await fetch(
+            "https://api.atmosud.org/episodes/pref/liste"
+          );
+          const data = await response.json();
+          processAlerts(data);
+        } catch (error) {
+          load_error(".alert_container");
+        }
+      })();
 
       function processAlerts(data) {
         const YEAR_DEBUT = 2014;
         const PAST_YEARS = new Date().getFullYear() - YEAR_DEBUT;
 
+        // Get the alerts of the past years
         let todayAlerts =
           data.filter((alert) => {
             return alert.date_diffusion.match(
@@ -359,6 +358,7 @@ if (city && insee) {
 
         const alerts_today = document.querySelector(".alerts-today");
 
+        // If there are alerts today, display them
         if (todayAlerts.length > 0) {
           alerts_today.classList.remove("hidden");
           alerts_today.innerHTML = `
@@ -385,6 +385,7 @@ if (city && insee) {
           `;
         }
 
+        // Calcul de la probabilité d'avoir une alerte aujourd'hui
         const pastAlertsPerDays = data.filter((alert) => {
           return alert.date_diffusion.match(
             new RegExp(
@@ -416,6 +417,7 @@ if (city && insee) {
       load_error(".graph_load");
     }
 
+    /* #### METEO MATICS #### */
     if (FETCH_METEO == true) {
       // fetching location coordinates to call meteomatics API
       (async () => {
@@ -437,9 +439,9 @@ if (city && insee) {
           load_error(".square_info");
         }
       })();
-      /* #### METEO MATICS #### */
       //fetch from meteomatics
       async function weatherInformations(x, y) {
+        // login meteomatics, merci de ne pas les utiliser
         let username = "iut_lambert";
         let password = "zv6g5ZwFK7";
 

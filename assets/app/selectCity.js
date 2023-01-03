@@ -2,7 +2,6 @@
 Système de Search-Bar grandement inspiré de ce tuto : https://dev.to/am20dipi/how-to-build-a-simple-search-bar-in-javascript-4onf
 modifié pour correspondre à mes besoins
 utilisation de l'API Atmosud pour récupérer les données
-
 */
 
 document.querySelector(".search_icon").addEventListener("click", () => {
