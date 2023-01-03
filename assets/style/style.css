@@ -241,6 +241,7 @@ ul.reco_container {
   gap: 1rem;
   flex-wrap: nowrap;
   overflow-x: auto;
+  border-radius: 0.8rem;
 }
 ul.reco_container li {
   display: flex;

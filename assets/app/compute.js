@@ -110,7 +110,6 @@ if (city && insee) {
             `https://api.atmosud.org/siam/v1/communes/${insee}`
           );
           const data = await response.json();
-          console.log(data);
           display_infos(data.data);
         } catch (error) {
           load_error(".atmosud");
@@ -338,7 +337,6 @@ if (city && insee) {
       fetchAlerts();
 
       function processAlerts(data) {
-        console.log(data);
         const YEAR_DEBUT = 2014;
         const PAST_YEARS = new Date().getFullYear() - YEAR_DEBUT;
 
@@ -358,8 +356,6 @@ if (city && insee) {
               )
             );
           }) || [];
-
-        console.log("todayAlerts", todayAlerts);
 
         const alerts_today = document.querySelector(".alerts-today");
 
@@ -389,8 +385,6 @@ if (city && insee) {
           `;
         }
 
-        console.log(todayAlerts);
-
         const pastAlertsPerDays = data.filter((alert) => {
           return alert.date_diffusion.match(
             new RegExp(
@@ -417,8 +411,6 @@ if (city && insee) {
 
         hide_loader(".alerts_container");
         alerts_probability.innerHTML = probability + "%";
-
-        console.log(probability);
       }
     } else {
       load_error(".graph_load");
@@ -442,6 +434,7 @@ if (city && insee) {
           }
         } catch (error) {
           load_error(".forecast_container");
+          load_error(".square_info");
         }
       })();
       /* #### METEO MATICS #### */
@@ -476,8 +469,6 @@ if (city && insee) {
 
           const data = await response.json();
           const data2 = await response2.json();
-
-          c(data);
           call_weather(data);
           call_forecast(data2);
         } catch (error) {
