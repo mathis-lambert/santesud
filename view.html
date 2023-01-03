@@ -234,18 +234,6 @@
             </div>
             <div class="weather_icon"></div>
           </div>
-          <div class="card skeleton reco_card atmosud">
-            <div class="loading-div">
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-            </div>
-            <p id="todayReco"></p>
-          </div>
 
           <div class="card skeleton iqa_container atmosud">
             <div class="allowed-click">
@@ -261,9 +249,7 @@
               <div class="ball"></div>
             </div>
             <div class="iqa_value" data-target="#iqa_modal"></div>
-            <div class="iqa-meter">
-              <div class="fill-gauge"></div>
-            </div>
+            <div class="fill-gauge"></div>
             <div class="ovl" data-target="#iqa_modal"></div>
           </div>
 
@@ -289,6 +275,37 @@
             <h3 class="particles" id="p3"></h3>
             <h3 class="particles" id="p4"></h3>
             <div class="ovl" data-target="#particles_modal"></div>
+          </div>
+
+          <div class="card skeleton square_info alerts_container">
+            <div
+              class="alerts_container-content d-flex column justify-center align-center"
+            >
+              <h2 class="text-center">Probabilité d'alerte préfectorale</h2>
+              <div class="alerts_probability"></div>
+            </div>
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+          </div>
+
+          <div class="card skeleton reco_card atmosud">
+            <div class="loading-div">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+            <p id="todayReco"></p>
           </div>
 
           <div class="card full_reco_card atmosud skeleton">
@@ -339,26 +356,22 @@
               <div class="ball"></div>
             </div>
           </div>
-          <div class="card skeleton square_info alerts_container">
-            <div
-              class="alerts_container-content d-flex column justify-center align-center"
-            >
-              <h2 class="text-center">Probabilité d'alerte préfectorale</h2>
-              <div class="alerts_probability"></div>
-            </div>
-            <div class="loading-div">
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
+
+    <footer>
+      <p>
+        Les données utilisées sont issues des APIs de
+        <a href="https://www.atmosud.org/">ATMOSUD</a>,
+        <a href="https://www.meteomatics.com/en/">Météomatics</a> ainsi que du
+        <a href="https://api.gouv.fr/">Gouvernement Français.</a>
+        <br />
+        Copyright © 2023 - Tous droits réservés
+        <br />
+        Développé par <i>Mathis LAMBERT</i> et <i>Matthieu COHEN</i>
+      </p>
+    </footer>
 
     <!-- JS FILES -->
     <script src="./assets/app/index.js" type="text/javascript"></script>

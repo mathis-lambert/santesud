@@ -19,6 +19,8 @@ $skeleton_color: rgba(90, 90, 90, 0.5);
 
 html {
   background-color: #74b5ff;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* body */
@@ -67,6 +69,13 @@ code {
     color: transparent;
   }
 }
+
+#home_para {
+  font-size: 1rem;
+  margin-bottom: 3rem;
+  width: min(100%, 400px);
+}
+
 .inputAndResult {
   display: flex;
   max-width: 400px;
@@ -124,6 +133,7 @@ code {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        cursor: pointer;
 
         h2 {
           font-size: clamp(0.9rem, 3vw, 1.1rem);
@@ -280,7 +290,7 @@ ul.reco_container {
   transform: translateX(-50%);
   background-color: rgb(7, 7, 7);
   backdrop-filter: blur(4px);
-  width: min(100%, 1400px);
+  width: min(100% - 1rem, 1200px);
   height: 85vh;
   height: 85dvh;
   padding: 1rem;
@@ -655,6 +665,7 @@ header {
       ul {
         li {
           margin-inline: 1rem;
+          cursor: pointer;
           h2 {
             font-size: 1rem;
             font-weight: 600;
@@ -804,7 +815,7 @@ header {
 }
 
 .container {
-  max-width: 1400px;
+  width: min(100%, 1200px);
   margin: 0 auto;
 }
 
@@ -888,20 +899,14 @@ a {
   flex-wrap: wrap;
 }
 
-.iqa-meter {
-  position: relative;
+.fill-gauge {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
-
-  .fill-gauge {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 0;
-    background-color: #0084ff;
-    transition: 0.3s;
-  }
+  height: 0;
+  background-color: #0084ff;
+  transition: 0.3s;
 }
 
 .card {
@@ -937,9 +942,11 @@ a {
   justify-content: center;
   align-items: center;
   object-fit: contain;
+  height: 85%;
+  aspect-ratio: 1;
   & object {
-    max-height: 100%;
-    width: 100%;
+    height: 100%;
+    max-width: 100%;
     object-fit: contain;
 
     & svg {
@@ -950,9 +957,8 @@ a {
 }
 
 .square_info {
-  flex: 1 1 40%;
-  aspect-ratio: 1;
-  max-height: 200px;
+  flex: 1 1 45%;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1083,5 +1089,22 @@ p {
   .reco_card,
   .particles_container {
     height: 200px;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: underline;
+
+      &:hover {
+        color: rgb(157, 211, 255);
+      }
+    }
   }
 }

@@ -10,7 +10,7 @@
 /* Development variables */
 const FETCH_APIs = true;
 const FETCH_ATMOSUD = true;
-const FETCH_METEO = true;
+const FETCH_METEO = false;
 
 const c = console.log.bind(console);
 c("SANTESUD - Développé par Mathis Lambert et Matthieu Cohen");
