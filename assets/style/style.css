@@ -1131,6 +1131,7 @@ footer p a:hover {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  aspect-ratio: 16/9;
 }
 .day_video video {
   aspect-ratio: 16/9;
