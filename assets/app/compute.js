@@ -173,6 +173,11 @@ if (city && insee) {
               data.legendes.indice_atmo[value.indice_atmo].couleur;
           });
         }
+
+        city_coord.x = data.commune.centroid.x;
+        city_coord.y = data.commune.centroid.y;
+        // call weather informations with the city coordinates
+        weatherInformations(city_coord.x, city_coord.y);
       }
       // call historical datas of IQA through the past year and display it in a chart
       const fetchIQA_average = async () => {
@@ -424,20 +429,6 @@ if (city && insee) {
     }
 
     if (FETCH_METEO == true) {
-      // fetching location coordinates to call meteomatics API
-      (async () => {
-        try {
-          const response = await fetch(
-            `https://api-adresse.data.gouv.fr/search/?q=${city}&limit=1`
-          );
-          const data = await response.json();
-          city_coord.x = data.features[0].geometry.coordinates[0];
-          city_coord.y = data.features[0].geometry.coordinates[1];
-          weatherInformations(city_coord.x, city_coord.y);
-        } catch (error) {
-          load_error(".forecast_container");
-        }
-      })();
       /* #### METEO MATICS #### */
       //fetch from meteomatics
       async function weatherInformations(x, y) {
