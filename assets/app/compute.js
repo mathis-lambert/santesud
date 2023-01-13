@@ -338,21 +338,25 @@ if (city && insee) {
         const YEAR_DEBUT = 2014;
         const PAST_YEARS = new Date().getFullYear() - YEAR_DEBUT;
 
+        console.log(data, new Date().getFullYear(), insee.slice(0, 2));
+
         // Get the alerts of the past years
         let todayAlerts =
           data.filter((alert) => {
-            return alert.date_diffusion.match(
-              new RegExp(
-                `${new Date().getFullYear() - 1}-${
-                  new Date().getMonth() + 1 < 10
-                    ? "0" + (new Date().getMonth() + 1)
-                    : new Date().getMonth() + 1
-                }-${
-                  new Date().getDate() < 10
-                    ? "0" + new Date().getDate()
-                    : new Date().getDate()
-                }$`
-              )
+            return (
+              alert.date_diffusion.match(
+                new RegExp(
+                  `${new Date().getFullYear()}-${
+                    new Date().getMonth() + 1 < 10
+                      ? "0" + (new Date().getMonth() + 1)
+                      : new Date().getMonth() + 1
+                  }-${
+                    new Date().getDate() < 10
+                      ? "0" + new Date().getDate()
+                      : new Date().getDate()
+                  }$`
+                )
+              ) && alert.zone == insee.slice(0, 2)
             );
           }) || [];
 
